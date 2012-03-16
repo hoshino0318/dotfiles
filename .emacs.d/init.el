@@ -112,7 +112,7 @@
 
 ;; ##### Ruby ######
 ;; 括弧の自動挿入
-;(require 'ruby-electric nl t)
+;;(require 'ruby-electric nil t)
 ;; end に対応する行のハイライト
 (when (require 'ruby-block nil t)
   (setq ruby-block-highlight-toggle t))
@@ -122,14 +122,15 @@
 (autoload 'inf-ruby-keys "inf-ruby"
   "Set local key defs for inf-ruby in ruby-mode")
 
+;; paren-mode : 対応する括弧を強調して表示する
+(setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
+(show-paren-mode t) ; 有効化
+
 ;; ruby-mode-hook 用の関数を定義
 (defun ruby-mode-hooks ()
   (inf-ruby-keys)
-  (ruby-electric-mode t)
+  ;;(ruby-electric-mode t)
   (ruby-block-mode t))
 ;; ruby-mode-hook に追加
 (add-hook 'ruby-mode-hook 'ruby-mode-hooks)
 ;; #################
-
-
-
