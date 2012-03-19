@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-03-16
+;; 2012-03-19
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -32,14 +32,19 @@
 ;; C-j を改行にする
 (define-key global-map "\C-j" 'newline)
 
+;; Mac の場合 command を meta に割り当て
+(when (eq system-type 'darwin)
+  (setq ns-command-modifier (quote meta))
+  )
+
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
 
 ;; 最大限色付け
 (setq font-lock-maximum-decoration t)
 
-;; ベルの音消す
-(setq visible-bell t)
+;; ベルの音とフラッシュの両方を消す
+(setq ring-bell-function 'ignore)
 
 ;; mark 領域に色付け
 (setq transient-mark-mode t)
