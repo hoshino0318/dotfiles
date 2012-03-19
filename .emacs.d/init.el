@@ -32,11 +32,6 @@
 ;; C-j を改行にする
 (define-key global-map "\C-j" 'newline)
 
-;; Mac の場合 command を meta に割り当て
-(when (eq system-type 'darwin)
-  (setq ns-command-modifier (quote meta))
-  )
-
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
 
