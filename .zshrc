@@ -37,8 +37,9 @@ esac
 # alias
 alias rm="rm -i"
 alias mv="mv -i"
-alias ls="ls -F --color"
-alias ll="ls -laF --color"
+alias ls="ls -FG"
+alias ll="ls -laFG"
+[ -f ~/dotfiles/.mac ] && source ~/dotfiles/.mac
 alias java="/usr/java/default/bin/java"
 alias javac="/usr/java/default/bin/javac"
 
