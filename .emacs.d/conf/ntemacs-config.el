@@ -7,10 +7,6 @@
 ;(setq frame-background-mode 'dark)
 (setq frame-background-mode 'light)
 
-
-;; C-z ‚ð undo ‚É‚·‚é (Windows ‚¾‚¯)
-(define-key global-map "\C-z" 'undo)
-
 ;; ======  font  ====== ;;
 ;; ascii ƒtƒHƒ“ƒg‚ð Menlo ‚É‚·‚é
 (set-face-attribute 'default nil

@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-03-19
+;; 2012-03-20
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -28,9 +28,21 @@
 (cd "~/")
 
 ;; C-h をバックスペースにする
-(define-key global-map "\C-h" 'delete-backward-char)
-;; C-j を改行にする
-(define-key global-map "\C-j" 'newline)
+(define-key global-map (kbd "C-h") 'delete-backward-char)
+;; C-j を newline にする
+(define-key global-map (kbd "C-j") 'newline)
+;; C-m を newline-and-indent にする
+(define-key global-map (kbd "C-m") 'newline-and-indent)
+;; C-o を other-window にする
+(define-key global-map (kbd "C-o") 'other-window)
+
+;; ターミナル以外の場合
+(when window-system
+  ;; tool-bar を非表示
+  (tool-bar-mode 0)
+  ;; C-z を undo にする
+  (define-key global-map (kbd "C-z") 'undo)
+  )
 
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
@@ -69,10 +81,6 @@
 
 ;; インデントを tab ではなく空白で行う
 (setq-default indent-tabs-mode nil)
-
-;; ツールバーを非表示
-;; M-x tool-bar-mode で表示非表示を切り替えられる
-(tool-bar-mode -1)
 
 ;; 行番号表示
 (require 'linum)

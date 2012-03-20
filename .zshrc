@@ -37,11 +37,15 @@ esac
 # alias
 alias rm="rm -i"
 alias mv="mv -i"
-alias ls="ls -FG"
-alias ll="ls -laFG"
-[ -f ~/dotfiles/.mac ] && source ~/dotfiles/.mac
 alias java="/usr/java/default/bin/java"
 alias javac="/usr/java/default/bin/javac"
+# OS X に関する設定
+if test -f ~/.mac_alias; then
+    source ~/.mac_alias
+else
+    alias ls="ls -F --color"
+    alias ll="ls -alhF --color"
+fi
 
 # 補完の利用設定
 autoload -U compinit
@@ -57,10 +61,10 @@ setopt correct
 # コマンドラインの引数で –prefix=/usr などの = 以降でも補完できる
 setopt magic_equal_subst
 
-# ディレクトリを水色にする｡
+# ディレクトリを水色にする
 export LS_COLORS='di=01;34'
 
-# ファイルリスト補完でもlsと同様に色をつける｡
+# ファイルリスト補完でも ls と同様に色をつける
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # sudo でも補完の対象
@@ -89,11 +93,8 @@ setopt auto_menu
 # cd をしたときにll を実行する
 function chpwd() { ls }
 
-# プロンプトを変更
-PS1="[${USER}@${HOST%%.*} %1~]%(!.#.$) "
-
 # Pager
-#export PAGER=lv
+export PAGER="lv -c"
 
 # Proxy の設定があれば読み込む
 [ -f ~/.proxy ] && source ~/.proxy
