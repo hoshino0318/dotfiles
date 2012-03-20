@@ -89,9 +89,6 @@ setopt auto_menu
 # cd をしたときにll を実行する
 function chpwd() { ls }
 
-# プロンプトを変更
-PS1="[${USER}@${HOST%%.*} %1~]%(!.#.$) "
-
 # Pager
 #export PAGER=lv
 

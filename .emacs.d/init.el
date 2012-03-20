@@ -28,9 +28,13 @@
 (cd "~/")
 
 ;; C-h をバックスペースにする
-(define-key global-map "\C-h" 'delete-backward-char)
-;; C-j を改行にする
-(define-key global-map "\C-j" 'newline)
+(define-key global-map (kbd "C-h") 'delete-backward-char)
+;; C-j を newline にする
+(define-key global-map (kbd "C-j") 'newline)
+;; C-m を newline-and-indent にする
+(define-key global-map (kbd "C-m") 'newline-and-indent)
+;; C-o で ウィンドウを切り替える
+(define-key global-map (kbd "C-o") 'other-window)
 
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
