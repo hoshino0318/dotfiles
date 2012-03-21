@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-03-20
+;; 2012-03-21
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -30,7 +30,7 @@
 ;; C-h をバックスペースにする
 (define-key global-map (kbd "C-h") 'delete-backward-char)
 ;; C-j を newline にする
-(define-key global-map (kbd "C-j") 'newline)
+(define-key global-map (kbd "C-j") 'newline-and-indent)
 ;; C-m を newline-and-indent にする
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 ;; C-o を other-window にする
@@ -142,3 +142,45 @@
 ;; ruby-mode-hook に追加
 (add-hook 'ruby-mode-hook 'ruby-mode-hooks)
 ;; #################
+
+;;; anything
+;; (auto-install-batch "anything")
+(when (require 'anything nil t)
+  (setq
+   ;; kill-ring する時の要素の最小値
+   (setq anything-kill-ring-threshold 4)
+   ;; 候補を表示するまでの時間 デフォルトは 0.5
+   anything-idle-delay 0.3
+   ;; タイプして再描画するまでの時間 デフォルトは 0.1
+   anything-input-idle-delay 0.2
+   ;; 候補の最大表示数 デフォルトは 50
+   anything-candidate-number-limit 100
+   ;; 候補が多いときに体感速度を早くする
+   anything-quick-update t
+   ;; 候補選択ショートカットをアルファベットに
+   anything-enable-shortcuts 'alphabet)
+
+  (when (require 'anything-config nil t)
+    ;; root 権限でアクションを実行するときのコマンド
+    ;; デフォルトでは "su"
+    (setq anything-su-or-sudo "sudo"))
+
+  (require 'anything-match-plugin nil t)
+
+  (when (and (executable-find "cmigemo")
+             (require 'migemo nil t))
+    (require 'anything-migemo nil t))
+
+  (when (require 'anything-complete nil t)
+    ;; lisp シンボルの補完候補の再検索時間
+    (anything-lisp-complete-symbol-set-timer 150))
+
+  (require 'anything-show-completion nil t)
+
+  (when (require 'auto-install nil t)
+    (require 'anything-auto-install nil t))
+
+  (when (require 'descbinds-anything nil t)
+    ;; describe-bindings をAnything に置き換える    
+    (descbinds-anything-install)))  
+;; end anything
