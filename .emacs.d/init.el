@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-03-20
+;; 2012-03-21
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -30,7 +30,7 @@
 ;; C-h をバックスペースにする
 (define-key global-map (kbd "C-h") 'delete-backward-char)
 ;; C-j を newline にする
-(define-key global-map (kbd "C-j") 'newline)
+(define-key global-map (kbd "C-j") 'newline-and-indent)
 ;; C-m を newline-and-indent にする
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 ;; C-o を other-window にする
@@ -47,31 +47,25 @@
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
 
+;; 色設定
+(set-face-foreground 'default "white")
+(set-face-background 'default "black")
+(setq frame-background-mode 'dark)
+
 ;; 最大限色付け
 (setq font-lock-maximum-decoration t)
 
-;; ベルの音とフラッシュの両方を消す
-(setq ring-bell-function 'ignore)
-
 ;; mark 領域に色付け
 (setq transient-mark-mode t)
+
+;; ベルの音とフラッシュの両方を消す
+(setq ring-bell-function 'ignore)
 
 ;; デフォルトの透明度を設定する (85%)
 (add-to-list 'default-frame-alist '(alpha . (100 80)))
 ;; カレントウィンドウの透明度を変更する (85%)
 ;; (set-frame-parameter nil 'alpha 0.85)
 (set-frame-parameter nil 'alpha '(100 80))
-
-;; 色設定
-(set-face-foreground 'default "white")
-(set-face-background 'default "black")
-(setq frame-background-mode 'dark)
-
-;; コンパイル関係
-;; (require 'smart-compile)
-;; (global-set-key "\C-c\C-m" 'smart-compile)
-;; (global-set-key "\C-c\C-r" 'recompile)
-;; (global-set-key "\C-c'"    'next-error)
 
 ;; BackUpファイル（hogehoge~）を作らない
 (setq make-backup-files nil)
@@ -81,6 +75,29 @@
 
 ;; インデントを tab ではなく空白で行う
 (setq-default indent-tabs-mode nil)
+
+;; paren-mode : 対応する括弧を強調して表示する
+(setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
+(show-paren-mode t) ; 有効化
+
+;; 現在行のハイライト
+(defface my-hl-line-face
+  ;; 背景が dark ならば背景色を紺に
+  '((((class color)(background dark))
+     (:background "NavyBlue" t))
+    ;; 背景が light ならば背景色を緑に
+    (((class color)(background light))
+     (:background "LightGoldenrodYellow" t))
+    (t (:bold t)))
+  "hl-line's my face")
+(setq hl-line-face 'my-hl-line-face)
+(global-hl-line-mode t)
+
+;; コンパイル関係
+;; (require 'smart-compile)
+;; (global-set-key "\C-c\C-m" 'smart-compile)
+;; (global-set-key "\C-c\C-r" 'recompile)
+;; (global-set-key "\C-c'"    'next-error)
 
 ;; 行番号表示
 (require 'linum)
@@ -130,10 +147,6 @@
 (autoload 'inf-ruby-keys "inf-ruby"
   "Set local key defs for inf-ruby in ruby-mode")
 
-;; paren-mode : 対応する括弧を強調して表示する
-(setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
-(show-paren-mode t) ; 有効化
-
 ;; ruby-mode-hook 用の関数を定義
 (defun ruby-mode-hooks ()
   (inf-ruby-keys)
@@ -142,3 +155,48 @@
 ;; ruby-mode-hook に追加
 (add-hook 'ruby-mode-hook 'ruby-mode-hooks)
 ;; #################
+
+;;; anything
+;; (auto-install-batch "anything")
+(when (require 'anything nil t)
+  (setq
+   ;; kill-ring する時の要素の最小値
+   anything-kill-ring-threshold 4
+   ;; 候補を表示するまでの時間 デフォルトは 0.5
+   anything-idle-delay 0.3
+   ;; タイプして再描画するまでの時間 デフォルトは 0.1
+   anything-input-idle-delay 0.2
+   ;; 候補の最大表示数 デフォルトは 50
+   anything-candidate-number-limit 100
+   ;; 候補が多いときに体感速度を早くする
+   anything-quick-update t
+   ;; 候補選択ショートカットをアルファベットに
+   anything-enable-shortcuts 'alphabet)
+
+  (when (require 'anything-config nil t)
+    ;; root 権限でアクションを実行するときのコマンド
+    ;; デフォルトでは "su"
+    (setq anything-su-or-sudo "sudo"))
+
+  (require 'anything-match-plugin nil t)
+
+  (when (and (executable-find "cmigemo")
+             (require 'migemo nil t))
+    (require 'anything-migemo nil t))
+
+  (when (require 'anything-complete nil t)
+    ;; lisp シンボルの補完候補の再検索時間
+    (anything-lisp-complete-symbol-set-timer 150))
+
+  (require 'anything-show-completion nil t)
+
+  (when (require 'auto-install nil t)
+    (require 'anything-auto-install nil t))
+
+  (when (require 'descbinds-anything nil t)
+    ;; describe-bindings をAnything に置き換える    
+    (descbinds-anything-install))
+  ;; M-y にanything-show-kill-ring を割り当てる
+  (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
+  )
+;; end anything
