@@ -108,3 +108,4 @@ export PAGER="lv -c"
 # less に色付け
 export LESS='-R'
 export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
+
