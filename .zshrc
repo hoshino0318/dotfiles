@@ -61,7 +61,9 @@ setopt correct
 # コマンドラインの引数で –prefix=/usr などの = 以降でも補完できる
 setopt magic_equal_subst
 
-# ディレクトリを水色にする
+# LSCOLORS (BSD 用) の色を変更
+export LSCOLORS=Exfxcxdxbxegedabagacad
+# LSOLORS の色変更
 export LS_COLORS='di=01;34'
 
 # ファイルリスト補完でも ls と同様に色をつける
