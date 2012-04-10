@@ -69,7 +69,6 @@
 
 ;; BackUpファイル（hogehoge~）を作らない
 (setq make-backup-files nil)
-
 ;; タイトルバーにファイル名を表示する
 (setq frame-title-format "%b")
 
@@ -200,3 +199,9 @@
   (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
   )
 ;; end anything
+
+;; js2-mode の設定
+(when (require 'js2-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+  )
