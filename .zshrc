@@ -37,8 +37,8 @@ esac
 # alias
 alias rm="rm -i"
 alias mv="mv -i"
-alias java="/usr/java/default/bin/java"
-alias javac="/usr/java/default/bin/javac"
+#alias java="/usr/java/default/bin/java"
+#alias javac="/usr/java/default/bin/javac"
 # OS X に関する設定
 if test -f ~/.mac_alias; then
     source ~/.mac_alias
