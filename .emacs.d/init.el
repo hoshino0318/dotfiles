@@ -210,8 +210,17 @@
   )
 ;; end anything
 
-;; js2-mode の設定
+;; js2-mode
 (when (require 'js2-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+  )
+
+;; Zen Coding Mode
+(when (require 'zencoding-mode nil t)
+  (add-hook 'sgml-mode-hook 'zencoding-mode)
+  (add-hook 'html-mode-hook 'zencoding-mode)
+  (add-hook 'text-mode-hook 'zencoding-mode)
+  ;; M-e を zenconding-expand-line にする
+  (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
   )
