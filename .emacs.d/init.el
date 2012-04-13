@@ -224,3 +224,6 @@
   ;; M-e を zenconding-expand-line にする
   (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
   )
+
+;; YASnippet
+(require 'yasnippet-bundle)
