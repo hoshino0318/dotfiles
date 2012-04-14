@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-03-21
+;; 2012-04-10
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -16,6 +16,8 @@
 
 ;; 日本語環境設定
 (set-language-environment "Japanese")
+;; utf-8 を優先して使用
+(prefer-coding-system 'utf-8)
 
 ;; isearchで日本語を検索できるようにする
 (defun w32-isearch-update ()
@@ -92,11 +94,11 @@
 (setq hl-line-face 'my-hl-line-face)
 (global-hl-line-mode t)
 
-;; コンパイル関係
-;; (require 'smart-compile)
-;; (global-set-key "\C-c\C-m" 'smart-compile)
-;; (global-set-key "\C-c\C-r" 'recompile)
-;; (global-set-key "\C-c'"    'next-error)
+;; smart-compile
+(require 'smart-compile)
+(global-set-key "\C-c\C-m" 'smart-compile)
+(global-set-key "\C-c\C-r" 'recompile)
+(global-set-key "\C-c'"    'next-error)
 
 ;; 行番号表示
 (require 'linum)
@@ -133,6 +135,14 @@
 ;; 環境に応じて適切な ***-config.el ファイルを読み込む
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/conf") ; 設定ファイルがあるディレクトリを指定
+
+;; redo+ の設定
+(when (require 'redo+ nil t)
+  ;; C-' にリドゥに割り当てる
+  ;; (global-set-key (kbd "C-'") 'redo)
+  ;; 日本語キーボードの場合 C-. などが良いかも
+   (global-set-key (kbd "C-.") 'redo)
+  )
 
 ;; ##### Ruby ######
 ;; 括弧の自動挿入
@@ -200,8 +210,20 @@
   )
 ;; end anything
 
-;; js2-mode の設定
+;; js2-mode
 (when (require 'js2-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
   )
+
+;; Zen Coding Mode
+(when (require 'zencoding-mode nil t)
+  (add-hook 'sgml-mode-hook 'zencoding-mode)
+  (add-hook 'html-mode-hook 'zencoding-mode)
+  (add-hook 'text-mode-hook 'zencoding-mode)
+  ;; M-e を zenconding-expand-line にする
+  (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
+  )
+
+;; YASnippet
+(require 'yasnippet-bundle)
