@@ -203,7 +203,7 @@
     (require 'anything-auto-install nil t))
 
   (when (require 'descbinds-anything nil t)
-    ;; describe-bindings をAnything に置き換える    
+    ;; describe-bindings をAnything に置き換える
     (descbinds-anything-install))
   ;; M-y にanything-show-kill-ring を割り当てる
   (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
