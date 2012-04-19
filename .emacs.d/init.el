@@ -220,7 +220,6 @@
 (when (require 'zencoding-mode nil t)
   (add-hook 'sgml-mode-hook 'zencoding-mode)
   (add-hook 'html-mode-hook 'zencoding-mode)
-  (add-hook 'text-mode-hook 'zencoding-mode)
   ;; M-e を zenconding-expand-line にする
   (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
   )
