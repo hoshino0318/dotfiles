@@ -18,6 +18,8 @@
 (set-language-environment "Japanese")
 ;; utf-8 を優先して使用
 (prefer-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
 
 ;; isearchで日本語を検索できるようにする
 (defun w32-isearch-update ()
@@ -225,4 +227,9 @@
   )
 
 ;; YASnippet
-(require 'yasnippet-bundle)
+(when (require 'yasnippet-bundle nil t))
+
+;; shell-mode でエスケープを綺麗に表示
+(autoload 'ansi-color-for-comint-mode-on "ansi-color"
+     "Set `ansi-color-for-comint-mode' to t." t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
