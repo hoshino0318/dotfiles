@@ -233,3 +233,11 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color"
      "Set `ansi-color-for-comint-mode' to t." t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;; Haskell
+(when (load "haskell-site-file")
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+  (add-hook 'haskell-mode-hook 'font-lock-mode)
+  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)  
+  )
