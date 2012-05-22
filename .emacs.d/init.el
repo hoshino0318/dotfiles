@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-04-10
+;; 2012-05-22
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -243,5 +243,6 @@
   )
 
 ;; Yaml
-(when (require 'yaml-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
+;(when (require 'yaml-mode nil t)
+;  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
+(require 'yaml-mode)
