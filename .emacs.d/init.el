@@ -249,3 +249,13 @@
 ;; Haml
 (when (require 'haml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
+
+;; Visual Basic
+(when (require 'visual-basic-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.cls$" . visual-basic-mode)))
+;;; Visual Basic mode
+;;(load-library "visual-basic-mode")
+;(load-file "visual-basic-mode")
+
+;;(add-to-list 'auto-mode-alist
+;;                '("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" . visual-basic-mode))
