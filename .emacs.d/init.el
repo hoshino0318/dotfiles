@@ -59,6 +59,8 @@
 ;; 最大限色付け
 (setq font-lock-maximum-decoration t)
 
+
+
 ;; mark 領域に色付け
 (setq transient-mark-mode t)
 
@@ -239,8 +241,9 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (add-hook 'haskell-mode-hook 'font-lock-mode)
-  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)  
+  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
   )
+
 
 ;; Yaml
 (when (require 'yaml-mode nil t)
@@ -253,3 +256,9 @@
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.cls$" . visual-basic-mode)))
+
+;; Java
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq c-basic-offset 2)))
