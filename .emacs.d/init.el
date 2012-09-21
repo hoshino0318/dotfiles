@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-06-18
+;; 2012-09-21
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -108,15 +108,15 @@
 (setq linum-format "%4d ")
 
 ;; auto-install の設定
-(when (require 'auto-install nil t)
+;;(when (require 'auto-install nil t)
   ;; インストールディレクトリを設定する 初期値は ~/.emacs.d/auto-install
-  (setq auto-install-directory "~/.emacs.d/elisp/")
+;;  (setq auto-install-directory "~/.emacs.d/elisp/")
   ;; EmacsWiki に登録されている elisp の名前を取得する
-  (auto-install-update-emacswiki-package-name t)
+;;  (auto-install-update-emacswiki-package-name t)
   ;; 必要であればプロキシの設定を行う
-  (setq url-proxy-services '(("http" . "localhost:8339")))
+;;  (setq url-proxy-services '(("http" . "localhost:8339")))
   ;; install-elisp の関数を利用可能にする
-  (auto-install-compatibility-setup))
+;;  (auto-install-compatibility-setup))
 
 ;; color-moccur の設定
 (when (require 'color-moccur nil t)
@@ -239,7 +239,7 @@
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (add-hook 'haskell-mode-hook 'font-lock-mode)
-  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)  
+  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
   )
 
 ;; Yaml
@@ -253,9 +253,9 @@
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.cls$" . visual-basic-mode)))
-;;; Visual Basic mode
-;;(load-library "visual-basic-mode")
-;(load-file "visual-basic-mode")
 
-;;(add-to-list 'auto-mode-alist
-;;                '("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" . visual-basic-mode))
+;; Java
+(add-hook 'java-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq c-basic-offset 2)))
