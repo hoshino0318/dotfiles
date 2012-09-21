@@ -259,3 +259,7 @@
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq c-basic-offset 2)))
+
+;; emacs-nav
+(require 'nav)
+(global-set-key "\C-x\C-d" 'nav-toggle)
