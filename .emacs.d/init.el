@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-06-18
+;; 2012-09-21
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -58,8 +58,6 @@
 
 ;; 最大限色付け
 (setq font-lock-maximum-decoration t)
-
-
 
 ;; mark 領域に色付け
 (setq transient-mark-mode t)
@@ -243,7 +241,6 @@
   (add-hook 'haskell-mode-hook 'font-lock-mode)
   (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
   )
-
 
 ;; Yaml
 (when (require 'yaml-mode nil t)
