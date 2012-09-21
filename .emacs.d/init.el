@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-05-22
+;; 2012-06-18
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -243,6 +243,19 @@
   )
 
 ;; Yaml
-;(when (require 'yaml-mode nil t)
-;  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
-(require 'yaml-mode)
+(when (require 'yaml-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
+
+;; Haml
+(when (require 'haml-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
+
+;; Visual Basic
+(when (require 'visual-basic-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.cls$" . visual-basic-mode)))
+;;; Visual Basic mode
+;;(load-library "visual-basic-mode")
+;(load-file "visual-basic-mode")
+
+;;(add-to-list 'auto-mode-alist
+;;                '("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" . visual-basic-mode))
