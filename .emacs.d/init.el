@@ -59,8 +59,6 @@
 ;; 最大限色付け
 (setq font-lock-maximum-decoration t)
 
-
-
 ;; mark 領域に色付け
 (setq transient-mark-mode t)
 
