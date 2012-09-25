@@ -17,3 +17,5 @@ setlocal tabstop<
 setlocal softtabstop=2
 setlocal shiftwidth=2
 
+set laststatus=2
+set statusline=%F%r%h%=
