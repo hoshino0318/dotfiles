@@ -17,6 +17,9 @@ setlocal tabstop=2
 setlocal softtabstop=2
 setlocal shiftwidth=2
 
+set laststatus=2
+set statusline=%F%r%h%=
+
 " 自動インデント
 set autoindent
 
@@ -31,4 +34,3 @@ set smartcase
 
 " コマンドの自動補完
 set wildmenu
-
