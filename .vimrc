@@ -34,3 +34,6 @@ set smartcase
 
 " コマンドの自動補完
 set wildmenu
+
+" 行末の空白を自動で消す
+autocmd BufWritePre * :%s/\s\+$//e
