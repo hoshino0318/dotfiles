@@ -263,3 +263,7 @@
 ;; emacs-nav
 (require 'nav)
 (global-set-key "\C-x\C-d" 'nav-toggle)
+
+;; Scala
+(add-to-list 'load-path "~/.emacs.d/elisp/scala-mode")
+(require 'scala-mode-auto)
