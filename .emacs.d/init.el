@@ -260,7 +260,7 @@
 
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.cls$" . visual-basic-mode)))
+  (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" . visual-basic-mode)))
 
 ;; Java
 (add-hook 'java-mode-hook
