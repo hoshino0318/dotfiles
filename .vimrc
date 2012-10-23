@@ -37,3 +37,6 @@ set wildmenu
 
 " 行末の空白を自動で消す
 autocmd BufWritePre * :%s/\s\+$//e
+
+" molokai を使う
+colorscheme molokai

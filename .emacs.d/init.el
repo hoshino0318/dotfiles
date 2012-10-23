@@ -91,6 +91,11 @@
 (setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
 (show-paren-mode t) ; 有効化
 
+;; multi-term
+;; (when (require 'multi-term nil t)
+;;   (setq multi-term-program shell-file-name)
+;;   )
+
 ;; 現在行のハイライト
 (defface my-hl-line-face
   ;; 背景が dark ならば背景色を紺に

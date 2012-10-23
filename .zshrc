@@ -111,3 +111,5 @@ export PAGER="lv -c"
 export LESS='-R'
 export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 
+# 個別の path 設定があれば読み込む
+[ -f ~/.path ] && source ~/.path
