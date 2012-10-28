@@ -39,4 +39,5 @@ set wildmenu
 autocmd BufWritePre * :%s/\s\+$//e
 
 " molokai を使う
+set t_Co=256
 colorscheme molokai
