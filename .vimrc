@@ -12,6 +12,8 @@ endif
 " for backspace
 set backspace=2
 
+" インデントの設定
+filetype plugin indent on
 set expandtab
 set tabstop=2
 set softtabstop=2
@@ -37,6 +39,7 @@ set wildmenu
 
 " 行末の空白を自動で消す
 autocmd BufWritePre * :%s/\s\+$//e
+
 
 " molokai を使う
 set t_Co=256
