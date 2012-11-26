@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-09-21
+;; 2012-11-27
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -278,10 +278,12 @@
             (setq indent-tabs-mode nil)
             (setq c-basic-offset 2)))
 
+;; Scala
+(when (require 'scala-mode-auto)
+  (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode)))
+
 ;; emacs-nav
 (require 'nav)
 (global-set-key "\C-x\C-d" 'nav-toggle)
 
-;; Scala
-(add-to-list 'load-path "~/.emacs.d/elisp/scala-mode")
-(require 'scala-mode-auto)
+
