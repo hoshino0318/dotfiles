@@ -48,3 +48,15 @@ autocmd BufWritePre * :%s/\s\+$//e
 set t_Co=256
 colorscheme molokai
 
+set nocompatible
+filetype off
+
+" Vundle
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
+
+" plugin
+Bundle "rails.vim"
+Bundle "bbommarito/vim-slim"
+
+filetype plugin indent on
