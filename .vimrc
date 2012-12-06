@@ -48,14 +48,19 @@ autocmd BufWritePre * :%s/\s\+$//e
 set t_Co=256
 colorscheme molokai
 
+" undodir
+if has('persistent_undo')
+  set undodir=~/.vimundo
+  set undofile
+endif
+
+" ### Vundle ###
 set nocompatible
 filetype off
 
-" Vundle
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 
-" plugin
 Bundle "rails.vim"
 Bundle "bbommarito/vim-slim"
 
