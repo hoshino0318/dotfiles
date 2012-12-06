@@ -61,7 +61,8 @@ filetype off
 set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 
-Bundle "rails.vim"
 Bundle "bbommarito/vim-slim"
+Bundle "ZenCoding.vim"
+Bundle "dag/vim2hs"
 
 filetype plugin indent on
