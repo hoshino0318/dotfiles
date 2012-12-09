@@ -64,5 +64,6 @@ call vundle#rc()
 Bundle "bbommarito/vim-slim"
 Bundle "ZenCoding.vim"
 Bundle "dag/vim2hs"
+Bundle "vim-coffee-script"
 
 filetype plugin indent on
