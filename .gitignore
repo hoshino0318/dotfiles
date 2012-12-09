@@ -3,4 +3,6 @@
 *.elc
 
 # vim
-/.vim/.netrwhist
+.vim/.netrwhist
+.vim/bundle/*
+*.sw[a-z]
