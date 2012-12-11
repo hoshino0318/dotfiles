@@ -48,6 +48,11 @@
 (define-key global-map (kbd "C-M-l") 'windmove-right)
 (define-key global-map (kbd "C-M-h") 'windmove-left)
 
+;; molokai を使う
+(when (require 'color-theme-molokai nil t)
+  (color-theme-molokai)
+  )
+
 ;; ターミナル以外の場合
 (when window-system
   ;; tool-bar を非表示
@@ -285,5 +290,3 @@
 ;; emacs-nav
 (require 'nav)
 (global-set-key "\C-x\C-d" 'nav-toggle)
-
-
