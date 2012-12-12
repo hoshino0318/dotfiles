@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-11-27
+;; 2012-12-12
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -48,10 +48,13 @@
 (define-key global-map (kbd "C-M-l") 'windmove-right)
 (define-key global-map (kbd "C-M-h") 'windmove-left)
 
-;; molokai を使う
-(when (require 'color-theme-molokai nil t)
-  (color-theme-molokai)
-  )
+;; ターミナルの場合、molokai を使う
+(cond
+ ((null window-system)
+  (when (require 'color-theme-molokai nil t)
+    (color-theme-molokai)
+    )
+  ))
 
 ;; ターミナル以外の場合
 (when window-system
