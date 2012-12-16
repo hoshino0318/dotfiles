@@ -54,6 +54,9 @@ if has('persistent_undo')
   set undofile
 endif
 
+" ruby
+autocmd BufNewFile,BufRead *.ru set filetype=ruby
+
 " ### Vundle ###
 set nocompatible
 filetype off
