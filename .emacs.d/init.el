@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-12-12
+;; 2012-12-28
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -33,12 +33,12 @@
 
 ;; C-h をバックスペースにする
 (define-key global-map (kbd "C-h") 'delete-backward-char)
-;; C-j を newline にする
-(define-key global-map (kbd "C-j") 'newline-and-indent)
+;; C-j を newline-and-indent にする
+(define-key global-map (kbd "C-j") 'newline)
 ;; C-m を newline-and-indent にする
 (define-key global-map (kbd "C-m") 'newline-and-indent)
-;; C-o を other-window にする
-(define-key global-map (kbd "C-o") 'other-window)
+;; C-q を other-window にする
+(define-key global-map (kbd "C-q") 'other-window)
 
 ;; 反対側のウィンドウにいけるように
 (setq windmove-wrap-around t)
@@ -92,7 +92,7 @@
 ;; (set-frame-parameter nil 'alpha 0.85)
 (set-frame-parameter nil 'alpha '(100 80))
 
-;; BackUpファイル（hogehoge~）を作らない
+;; BackUpファイル (xxx~) を作らない
 (setq make-backup-files nil)
 ;; タイトルバーにファイル名を表示する
 (setq frame-title-format "%b")
@@ -244,7 +244,7 @@
   (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
   )
 
-;; Zen Coding Mode
+;; Zen Coding
 (when (require 'zencoding-mode nil t)
   (add-hook 'sgml-mode-hook 'zencoding-mode)
   (add-hook 'html-mode-hook 'zencoding-mode)
