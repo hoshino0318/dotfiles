@@ -34,7 +34,7 @@
 ;; C-h をバックスペースにする
 (define-key global-map (kbd "C-h") 'delete-backward-char)
 ;; C-j を newline-and-indent にする
-(define-key global-map (kbd "C-j") 'newline)
+(define-key global-map (kbd "C-j") 'newline-and-indent)
 ;; C-m を newline-and-indent にする
 (define-key global-map (kbd "C-m") 'newline-and-indent)
 ;; C-q を other-window にする

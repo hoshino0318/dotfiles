@@ -57,16 +57,21 @@ endif
 " ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 
-" ### Vundle ###
+" ### NeoBundle ###
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/vundle.git/
-call vundle#rc()
+let g:neobundle_default_git_protocol='https'
 
-Bundle "bbommarito/vim-slim"
-Bundle "ZenCoding.vim"
-Bundle "dag/vim2hs"
-Bundle "vim-coffee-script"
+set rtp+=~/dotfiles/neobundle.vim
+if has('vim_starting')
+  set runtimepath+=~/dotfiles/neobundle.vim
+  call neobundle#rc(expand('~/.vim/neobundle/'))
+endif
+
+"NeoBundle "bbommarito/vim-slim" (Not Found)
+NeoBundle "ZenCoding.vim"
+NeoBundle "dag/vim2hs"
+NeoBundle "vim-coffee-script"
 
 filetype plugin indent on
