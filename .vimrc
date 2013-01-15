@@ -69,7 +69,8 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/neobundle/'))
 endif
 
-"NeoBundle "bbommarito/vim-slim" (Not Found)
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplcache'
 NeoBundle "ZenCoding.vim"
 NeoBundle "dag/vim2hs"
 NeoBundle "vim-coffee-script"
