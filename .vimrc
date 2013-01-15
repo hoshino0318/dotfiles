@@ -57,7 +57,7 @@ endif
 " ruby
 autocmd BufNewFile,BufRead *.ru set filetype=ruby
 
-" ### NeoBundle ###
+" ##### NeoBundle #####
 set nocompatible
 filetype off
 
@@ -69,10 +69,18 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/neobundle/'))
 endif
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle "ZenCoding.vim"
 NeoBundle "dag/vim2hs"
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplcache-rsense'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle "vim-coffee-script"
+NeoBundle "ZenCoding.vim"
 
 filetype plugin indent on
+" ### END NeoBundle ###
+
+" omnifunc
+setlocal omnifunc=syntaxcomplete#Complete
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
