@@ -1,0 +1,2 @@
+:NeoBundleInstall
+:quit
