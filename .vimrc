@@ -44,10 +44,6 @@ set wildmenu
 " 行末の空白を自動で消す
 autocmd BufWritePre * :%s/\s\+$//e
 
-" molokai を使う
-set t_Co=256
-colorscheme molokai
-
 " undodir
 if has('persistent_undo')
   set undodir=~/.vimundo
@@ -69,15 +65,20 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/neobundle/'))
 endif
 
-NeoBundle "dag/vim2hs"
+NeoBundle 'dag/vim2hs'
+NeoBundle 'derekwyatt/vim-scala'
+NeoBundle 'molokai'
 NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neocomplcache-rsense'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle "vim-coffee-script"
-NeoBundle "ZenCoding.vim"
+NeoBundle 'vim-coffee-script'
+NeoBundle 'ZenCoding.vim'
 
 filetype plugin indent on
 " ### END NeoBundle ###
+
+" molokai
+set t_Co=256
+colorscheme molokai
 
 " omnifunc
 setlocal omnifunc=syntaxcomplete#Complete
