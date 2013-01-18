@@ -3,7 +3,7 @@
 basedir=`dirname $0`/../..
 
 # set files
-FILE_LIST=(.emacs.d .vimrc .vim .zshrc)
+FILE_LIST=(.emacs.d .screenrc .vimrc .vim .zshrc)
 
 for file in ${FILE_LIST[@]}; do
   if [ -f ~/$file -o -d ~/$file ]; then
