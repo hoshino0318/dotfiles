@@ -169,15 +169,24 @@
   ;; C-' にリドゥに割り当てる
   ;; (global-set-key (kbd "C-'") 'redo)
   ;; 日本語キーボードの場合 C-. などが良いかも
-   (global-set-key (kbd "C-.") 'redo)
+  (global-set-key (kbd "C-.") 'redo)
   )
+
+;; shell-mode でエスケープを綺麗に表示
+(autoload 'ansi-color-for-comint-mode-on "ansi-color"
+     "Set `ansi-color-for-comint-mode' to t." t)
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 
 ;; ##### Ruby ######
 ;; 括弧の自動挿入
-;;(require 'ruby-electric nil t)
+;; (require 'ruby-electric nil t)
 ;; end に対応する行のハイライト
-(when (require 'ruby-block nil t)
-  (setq ruby-block-highlight-toggle t))
+(add-hook 'ruby-mode-hook
+          #'(lambda()
+              (when (require 'ruby-block nil t)
+                (setq ruby-block-highlight-toggle t)
+                )))
 ;; インタラクティブ Ruby を利用する
 (autoload 'run-ruby "inf-ruby"
   "Run an inferior Ruby Process")
@@ -239,11 +248,11 @@
 ;; end anything
 
 ;; js2-mode
-(when (require 'js2-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-  )
-
+(add-hook 'js2-mode-hook
+          #'(lambda()
+              (when (require 'js2-mode nil t)
+                (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+                (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode)))))
 ;; Zen Coding
 (when (require 'zencoding-mode nil t)
   (add-hook 'sgml-mode-hook 'zencoding-mode)
@@ -254,11 +263,6 @@
 
 ;; YASnippet
 (when (require 'yasnippet-bundle nil t))
-
-;; shell-mode でエスケープを綺麗に表示
-(autoload 'ansi-color-for-comint-mode-on "ansi-color"
-     "Set `ansi-color-for-comint-mode' to t." t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; Haskell
 (when (load "haskell-site-file")
