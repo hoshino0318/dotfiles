@@ -2,7 +2,7 @@
 
 basedir=`dirname $0`/../..
 
-FILE_LIST=(.emacs.d .screenrc .vimrc .vim .zshrc)
+FILE_LIST=(.emacs.d .screenrc .tmux.conf .vimrc .vim .zshrc)
 
 : [Info] Set synblic link
 for file in ${FILE_LIST[@]}; do
