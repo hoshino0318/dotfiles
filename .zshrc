@@ -98,6 +98,9 @@ function chpwd() { ls }
 # Pager
 export PAGER="lv -c"
 
+# beep 音を消す
+setopt nolistbeep
+
 # Proxy の設定があれば読み込む
 [ -f ~/.proxy ] && source ~/.proxy
 
