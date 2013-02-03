@@ -65,13 +65,14 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/neobundle/'))
 endif
 
-NeoBundle 'dag/vim2hs'
-NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'molokai'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'vim-coffee-script'
-NeoBundle 'ZenCoding.vim'
+NeoBundle 'Lokaltog/vim-powerline'
+NeoBundleLazy 'dag/vim2hs'
+NeoBundleLazy 'derekwyatt/vim-scala'
+NeoBundleLazy 'vim-coffee-script'
+NeoBundleLazy 'ZenCoding.vim'
 
 filetype plugin indent on
 " ### END NeoBundle ###
