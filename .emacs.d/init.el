@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2012-12-28
+;; 2013-02-09
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -11,6 +11,7 @@
         (add-to-list 'load-path default-directory)
         (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
             (normal-top-level-add-subdirs-to-load-path))))))
+
 ;; 引数のディレクトリとそのサブディレクトリを load-path に追加
 (add-to-load-path "elisp" "conf")
 
@@ -94,6 +95,7 @@
 
 ;; BackUpファイル (xxx~) を作らない
 (setq make-backup-files nil)
+
 ;; タイトルバーにファイル名を表示する
 (setq frame-title-format "%b")
 
@@ -134,15 +136,44 @@
 (setq linum-format "%4d ")
 
 ;; auto-install の設定
-;;(when (require 'auto-install nil t)
+(when (require 'auto-install nil t)
   ;; インストールディレクトリを設定する 初期値は ~/.emacs.d/auto-install
-;;  (setq auto-install-directory "~/.emacs.d/elisp/")
+  (setq auto-install-directory "~/.emacs.d/elisp/")
   ;; EmacsWiki に登録されている elisp の名前を取得する
-;;  (auto-install-update-emacswiki-package-name t)
+  (auto-install-update-emacswiki-package-name t)
   ;; 必要であればプロキシの設定を行う
-;;  (setq url-proxy-services '(("http" . "localhost:8339")))
+  ;;(setq url-proxy-services '(("http" . "localhost:8339")))
   ;; install-elisp の関数を利用可能にする
-;;  (auto-install-compatibility-setup))
+  (auto-install-compatibility-setup)
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain))
+
+;;; emacs technique bible
+;; 試行錯誤用ファイルを開くための設定
+(require 'open-junk-file)
+;; C-x C-z で試行錯誤用ファイルを開く
+(global-set-key (kbd "C-x C-z") 'open-junk-file)
+;; 式の評価結果を注釈するための設定
+(require 'lispxmp)
+;; emacs-list-mode で C-c C-d を押すと注釈される
+(define-key emacs-lisp-mode-map (kbd "C-c C-d") 'lispxmp)
+;; 括弧の対応を保持する設定
+(require 'paredit)
+(add-hook 'emacs-lisp-mode-hook       'enable-paredit-mode)
+(add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+(add-hook 'lisp-mode-hook             'enable-paredit-mode)
+(add-hook 'ielm-mode-hook             'enable-paredit-mode)
+;; 自動バイトコンパイルを無効にするファイル名の正規表現
+(require 'auto-async-byte-compile)
+(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+(add-hook 'emacs-list-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+(add-hook 'ielm-mode-hook       'turn-on-eldoc-mode)
+(setq eldoc-idle-delay 0.2)         ;; すぐに表示したい
+(setq eldoc-minor-mode-string "")   ;; モードラインに Eldoc と表示しない
+;; find-function をキー割り当てする
+(find-function-setup-keys)
+;;; end
 
 ;; color-moccur の設定
 (when (require 'color-moccur nil t)
