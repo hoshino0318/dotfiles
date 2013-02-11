@@ -1,6 +1,6 @@
 ;; init.el
 ;; Edit by Tatsuya Hoshino
-;; 2013-02-09
+;; 2013-02-12
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -52,9 +52,8 @@
 ;; ターミナルの場合、molokai を使う
 (cond
  ((null window-system)
-  (when (require 'color-theme-molokai nil t)
-    (color-theme-molokai)
-    )
+  (require 'color-theme-molokai)
+  (color-theme-molokai)
   ))
 
 ;; ターミナル以外の場合
@@ -69,9 +68,9 @@
 (setq inhibit-startup-message t)
 
 ;; 色設定
-(set-face-foreground 'default "white")
-(set-face-background 'default "black")
-(setq frame-background-mode 'dark)
+;; (set-face-foreground 'default "white")
+;; (set-face-background 'default "black")
+;; (setq frame-background-mode 'dark)
 
 ;; dmacro
 (defconst *dmacro-key* "\C-t" "繰返し指定キー")
@@ -88,10 +87,10 @@
 (setq ring-bell-function 'ignore)
 
 ;; デフォルトの透明度を設定する (85%)
-(add-to-list 'default-frame-alist '(alpha . (100 80)))
+;;(add-to-list 'default-frame-alist '(alpha . (100 100)))
 ;; カレントウィンドウの透明度を変更する (85%)
-;; (set-frame-parameter nil 'alpha 0.85)
-(set-frame-parameter nil 'alpha '(100 80))
+;;(set-frame-parameter nil 'alpha 1.0)
+;;(set-frame-parameter nil 'alpha '(100 80))
 
 ;; BackUpファイル (xxx~) を作らない
 (setq make-backup-files nil)
@@ -136,16 +135,18 @@
 (setq linum-format "%4d ")
 
 ;; auto-install の設定
-(when (require 'auto-install nil t)
-  ;; インストールディレクトリを設定する 初期値は ~/.emacs.d/auto-install
-  (setq auto-install-directory "~/.emacs.d/elisp/")
-  ;; EmacsWiki に登録されている elisp の名前を取得する
-  (auto-install-update-emacswiki-package-name t)
-  ;; 必要であればプロキシの設定を行う
-  ;;(setq url-proxy-services '(("http" . "localhost:8339")))
-  ;; install-elisp の関数を利用可能にする
-  (auto-install-compatibility-setup)
-  (setq ediff-window-setup-function 'ediff-setup-windows-plain))
+(cond
+ ((null window-system)
+  (when (require 'auto-install nil t)
+    ;; インストールディレクトリを設定する 初期値は ~/.emacs.d/auto-install
+    (setq auto-install-directory "~/.emacs.d/elisp/")
+    ;; EmacsWiki に登録されている elisp の名前を取得する
+    (auto-install-update-emacswiki-package-name t)
+    ;; 必要であればプロキシの設定を行う
+    ;;(setq url-proxy-services '(("http" . "localhost:8339")))
+    ;; install-elisp の関数を利用可能にする
+    (auto-install-compatibility-setup)
+    (setq ediff-window-setup-function 'ediff-setup-windows-plain))))
 
 ;;; emacs technique bible
 ;; 試行錯誤用ファイルを開くための設定
