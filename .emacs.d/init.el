@@ -67,6 +67,10 @@
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
 
+;; cua-mode
+(cua-mode t)
+(setq cua-enable-cua-keys nil)
+
 ;; 色設定
 ;; (set-face-foreground 'default "white")
 ;; (set-face-background 'default "black")
