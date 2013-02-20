@@ -1,4 +1,4 @@
-;; init.el
+0;95;c;; init.el
 ;; Edit by Tatsuya Hoshino
 ;; 2013-02-12
 
@@ -126,6 +126,9 @@
   "hl-line's my face")
 (setq hl-line-face 'my-hl-line-face)
 (global-hl-line-mode t)
+
+;; delete trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; smart-compile
 (require 'smart-compile)
