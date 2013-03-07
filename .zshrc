@@ -117,3 +117,18 @@ export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 
 # 個別の path 設定があれば読み込む
 [ -f ~/.path ] && source ~/.path
+
+zle -N x-copy-region-as-kill
+x-kill-region () {
+  zle kill-region
+  print -rn $CUTBUFFER | putclip
+}
+zle -N x-kill-region
+x-yank () {
+  CUTBUFFER=$(getclip)
+  zle yank
+}
+zle -N x-yank
+bindkey -e '^[w' x-kill-region
+bindkey -e '^W' x-kill-region
+bindkey -e '^Y' x-yank

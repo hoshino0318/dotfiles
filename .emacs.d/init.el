@@ -1,6 +1,6 @@
-0;95;c;; init.el
-;; Edit by Tatsuya Hoshino
-;; 2013-02-12
+;; init.el
+;; Author: Tatsuya Hoshino
+;; Update: 2013-02-21
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -90,12 +90,6 @@
 ;; ベルの音とフラッシュの両方を消す
 (setq ring-bell-function 'ignore)
 
-;; デフォルトの透明度を設定する (85%)
-;;(add-to-list 'default-frame-alist '(alpha . (100 100)))
-;; カレントウィンドウの透明度を変更する (85%)
-;;(set-frame-parameter nil 'alpha 1.0)
-;;(set-frame-parameter nil 'alpha '(100 80))
-
 ;; BackUpファイル (xxx~) を作らない
 (setq make-backup-files nil)
 
@@ -104,6 +98,10 @@
 
 ;; インデントを tab ではなく空白で行う
 (setq-default indent-tabs-mode nil)
+
+;; emacs-nav
+(require 'nav)
+(global-set-key "\C-x\C-d" 'nav-toggle)
 
 ;; paren-mode : 対応する括弧を強調して表示する
 (setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
@@ -205,17 +203,14 @@
 
 ;; redo+ の設定
 (when (require 'redo+ nil t)
-  ;; C-' にリドゥに割り当てる
-  ;; (global-set-key (kbd "C-'") 'redo)
-  ;; 日本語キーボードの場合 C-. などが良いかも
-  (global-set-key (kbd "C-.") 'redo)
+  ;; C-M-_' にリドゥに割り当てる
+  (define-key global-map (kbd "C-M-_") 'redo)
   )
 
 ;; shell-mode でエスケープを綺麗に表示
 (autoload 'ansi-color-for-comint-mode-on "ansi-color"
      "Set `ansi-color-for-comint-mode' to t." t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
 
 ;; ##### Ruby ######
 ;; 括弧の自動挿入
@@ -321,7 +316,7 @@
 
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\)$" . visual-basic-mode)))
+  (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\|xla\\)$" . visual-basic-mode)))
 
 ;; Java
 (add-hook 'java-mode-hook
@@ -332,7 +327,3 @@
 ;; Scala
 (when (require 'scala-mode-auto)
   (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode)))
-
-;; emacs-nav
-(require 'nav)
-(global-set-key "\C-x\C-d" 'nav-toggle)
