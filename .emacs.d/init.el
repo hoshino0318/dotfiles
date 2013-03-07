@@ -181,7 +181,14 @@
 (find-function-setup-keys)
 ;;; end
 
-;; color-moccur の設定
+;; auto-complete
+(when (require 'auto-complete-config nil t)
+  (add-to-list 'ac-dictionary-directories
+               "~/.emacs.d/elisp/ac-dict")
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (ac-config-default))
+
+;; color-moccur
 (when (require 'color-moccur nil t)
   ;; M-o に occur-by-moccur を割り当て
   (define-key global-map (kbd "M-o") 'occur-by-moccur)
