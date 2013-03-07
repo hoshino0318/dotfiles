@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013-02-21
+;; Update: 2013/03/07
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -169,14 +169,14 @@
 (add-hook 'lisp-mode-hook             'enable-paredit-mode)
 (add-hook 'ielm-mode-hook             'enable-paredit-mode)
 ;; 自動バイトコンパイルを無効にするファイル名の正規表現
-(require 'auto-async-byte-compile)
-(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
-(add-hook 'emacs-list-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook       'turn-on-eldoc-mode)
-(setq eldoc-idle-delay 0.2)         ;; すぐに表示したい
-(setq eldoc-minor-mode-string "")   ;; モードラインに Eldoc と表示しない
+;; (require 'auto-async-byte-compile)
+;; (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+;; (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+;; (add-hook 'emacs-list-mode-hook 'turn-on-eldoc-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+;; (add-hook 'ielm-mode-hook       'turn-on-eldoc-mode)
+;; (setq eldoc-idle-delay 0.2)         ;; すぐに表示したい
+;; (setq eldoc-minor-mode-string "")   ;; モードラインに Eldoc と表示しない
 ;; find-function をキー割り当てする
 (find-function-setup-keys)
 ;;; end
