@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013-02-21
+;; Update: 2013/03/07
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -67,6 +67,10 @@
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
 
+;; cua-mode
+(cua-mode t)
+(setq cua-enable-cua-keys nil)
+
 ;; 色設定
 ;; (set-face-foreground 'default "white")
 ;; (set-face-background 'default "black")
@@ -125,6 +129,9 @@
 (setq hl-line-face 'my-hl-line-face)
 (global-hl-line-mode t)
 
+;; delete trailing whitespace
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; smart-compile
 (require 'smart-compile)
 (global-set-key "\C-c\C-m" 'smart-compile)
@@ -166,19 +173,26 @@
 (add-hook 'lisp-mode-hook             'enable-paredit-mode)
 (add-hook 'ielm-mode-hook             'enable-paredit-mode)
 ;; 自動バイトコンパイルを無効にするファイル名の正規表現
-(require 'auto-async-byte-compile)
-(setq auto-async-byte-compile-exclude-files-regexp "/junk/")
-(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
-(add-hook 'emacs-list-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'ielm-mode-hook       'turn-on-eldoc-mode)
-(setq eldoc-idle-delay 0.2)         ;; すぐに表示したい
-(setq eldoc-minor-mode-string "")   ;; モードラインに Eldoc と表示しない
+;; (require 'auto-async-byte-compile)
+;; (setq auto-async-byte-compile-exclude-files-regexp "/junk/")
+;; (add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
+;; (add-hook 'emacs-list-mode-hook 'turn-on-eldoc-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+;; (add-hook 'ielm-mode-hook       'turn-on-eldoc-mode)
+;; (setq eldoc-idle-delay 0.2)         ;; すぐに表示したい
+;; (setq eldoc-minor-mode-string "")   ;; モードラインに Eldoc と表示しない
 ;; find-function をキー割り当てする
 (find-function-setup-keys)
 ;;; end
 
-;; color-moccur の設定
+;; auto-complete
+(when (require 'auto-complete-config nil t)
+  (add-to-list 'ac-dictionary-directories
+               "~/.emacs.d/elisp/ac-dict")
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (ac-config-default))
+
+;; color-moccur
 (when (require 'color-moccur nil t)
   ;; M-o に occur-by-moccur を割り当て
   (define-key global-map (kbd "M-o") 'occur-by-moccur)
