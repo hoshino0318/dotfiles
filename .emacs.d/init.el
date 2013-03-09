@@ -99,6 +99,10 @@
 (require 'nav)
 (global-set-key "\C-x\C-d" 'nav-toggle)
 
+;; cua-mode
+(cua-mode t)
+(setq cua-enable-cua-keys nil)
+
 ;; paren-mode : 対応する括弧を強調して表示する
 (setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
 (show-paren-mode t) ; 有効化
@@ -309,7 +313,7 @@
 
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\|xla\\)$" . visual-basic-mode)))
+  (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\|vba\\|xla\\)$" . visual-basic-mode)))
 
 ;; Java
 (add-hook 'java-mode-hook
