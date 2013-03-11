@@ -186,6 +186,8 @@
   (add-to-list 'ac-dictionary-directories
                "~/.emacs.d/elisp/ac-dict")
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (define-key ac-complete-mode-map (kbd "C-p") 'ac-previous)
+  (define-key ac-complete-mode-map (kbd "C-n") 'ac-next)
   (ac-config-default))
 
 ;; color-moccur
