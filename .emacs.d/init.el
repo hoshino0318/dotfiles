@@ -287,6 +287,9 @@
     (descbinds-anything-install))
   ;; M-y にanything-show-kill-ring を割り当てる
   (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
+
+  ;; map C-x b to anything-for-files
+  (global-set-key (kbd "C-x b") 'anything-for-files)
   )
 ;; end anything
 
