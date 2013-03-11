@@ -190,6 +190,8 @@
   (add-to-list 'ac-dictionary-directories
                "~/.emacs.d/elisp/ac-dict")
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+  (define-key ac-complete-mode-map (kbd "C-p") 'ac-previous)
+  (define-key ac-complete-mode-map (kbd "C-n") 'ac-next)
   (ac-config-default))
 
 ;; color-moccur
@@ -289,6 +291,9 @@
     (descbinds-anything-install))
   ;; M-y にanything-show-kill-ring を割り当てる
   (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
+
+  ;; map C-x b to anything-for-files
+  (global-set-key (kbd "C-x b") 'anything-for-files)
   )
 ;; end anything
 
