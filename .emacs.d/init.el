@@ -129,9 +129,6 @@
 (setq hl-line-face 'my-hl-line-face)
 (global-hl-line-mode t)
 
-;; delete trailing whitespace
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; smart-compile
 (require 'smart-compile)
 (global-set-key "\C-c\C-m" 'smart-compile)
