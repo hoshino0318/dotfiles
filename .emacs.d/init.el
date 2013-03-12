@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/03/07
+;; Update: 2013/03/12
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -141,7 +141,6 @@
 ;; 行番号表示
 (require 'linum)
 (global-linum-mode)
-(setq linum-format "%4d ")
 
 ;; auto-install の設定
 (cond
@@ -240,6 +239,29 @@
 (autoload 'inf-ruby-keys "inf-ruby"
   "Set local key defs for inf-ruby in ruby-mode")
 
+;; align for ruby
+(require 'align)
+(add-to-list 'align-rules-list
+             '(ruby-comma-delimiter
+               (regexp . ",\\(\\s-*\\)[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+(add-to-list 'align-rules-list
+             '(ruby-hash-literal
+               (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+(add-to-list 'align-rules-list
+             '(ruby-assignment-literal
+               (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+(add-to-list 'align-rules-list
+             '(ruby-xmpfilter-mark
+               (regexp . "\\(\\s-*\\)# => [^#\t\n]")
+               (repeat . nil)
+               (modes  . '(ruby-mode))))
+
 ;; ruby-mode-hook 用の関数を定義
 (defun ruby-mode-hooks ()
   (inf-ruby-keys)
@@ -297,23 +319,6 @@
   )
 ;; end anything
 
-;; js2-mode
-(add-hook 'js2-mode-hook
-          #'(lambda()
-              (when (require 'js2-mode nil t)
-                (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-                (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode)))))
-;; Zen Coding
-(when (require 'zencoding-mode nil t)
-  (add-hook 'sgml-mode-hook 'zencoding-mode)
-  (add-hook 'html-mode-hook 'zencoding-mode)
-  ;; M-e を zenconding-expand-line にする
-  (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
-  )
-
-;; YASnippet
-(when (require 'yasnippet-bundle nil t))
-
 ;; Haskell
 (when (load "haskell-site-file")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -322,24 +327,43 @@
   (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
   )
 
-;; Yaml
-(when (require 'yaml-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
-
-;; Haml
-(when (require 'haml-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
-
-;; Visual Basic
-(when (require 'visual-basic-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\|vba\\|xla\\)$" . visual-basic-mode)))
-
 ;; Java
 (add-hook 'java-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq c-basic-offset 2)))
 
+;; JavaScript
+(add-hook 'js2-mode-hook
+          #'(lambda()
+              (when (require 'js2-mode nil t)
+                (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+                (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode)))))
+
 ;; Scala
 (when (require 'scala-mode-auto)
   (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode)))
+
+;; Visual Basic
+(when (require 'visual-basic-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\|vba\\|xla\\)$" . visual-basic-mode)))
+
+;; Haml
+(when (require 'haml-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
+
+;; Yaml
+(when (require 'yaml-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
+
+;; YASnippet
+(when (require 'yasnippet-bundle nil t))
+
+;; Zen Coding
+(when (require 'zencoding-mode nil t)
+  (add-hook 'sgml-mode-hook 'zencoding-mode)
+  (add-hook 'html-mode-hook 'zencoding-mode)
+  ;; M-e を zenconding-expand-line にする
+  (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
+  )
+
