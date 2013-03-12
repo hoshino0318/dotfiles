@@ -141,6 +141,7 @@
 ;; 行番号表示
 (require 'linum)
 (global-linum-mode)
+(setq linum-format "%d ")
 
 ;; auto-install の設定
 (cond
@@ -224,53 +225,6 @@
      "Set `ansi-color-for-comint-mode' to t." t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-;; ##### Ruby ######
-;; 括弧の自動挿入
-;; (require 'ruby-electric nil t)
-;; end に対応する行のハイライト
-(add-hook 'ruby-mode-hook
-          #'(lambda()
-              (when (require 'ruby-block nil t)
-                (setq ruby-block-highlight-toggle t)
-                )))
-;; インタラクティブ Ruby を利用する
-(autoload 'run-ruby "inf-ruby"
-  "Run an inferior Ruby Process")
-(autoload 'inf-ruby-keys "inf-ruby"
-  "Set local key defs for inf-ruby in ruby-mode")
-
-;; align for ruby
-(require 'align)
-(add-to-list 'align-rules-list
-             '(ruby-comma-delimiter
-               (regexp . ",\\(\\s-*\\)[^# \t\n]")
-               (repeat . t)
-               (modes  . '(ruby-mode))))
-(add-to-list 'align-rules-list
-             '(ruby-hash-literal
-               (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
-               (repeat . t)
-               (modes  . '(ruby-mode))))
-(add-to-list 'align-rules-list
-             '(ruby-assignment-literal
-               (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
-               (repeat . t)
-               (modes  . '(ruby-mode))))
-(add-to-list 'align-rules-list
-             '(ruby-xmpfilter-mark
-               (regexp . "\\(\\s-*\\)# => [^#\t\n]")
-               (repeat . nil)
-               (modes  . '(ruby-mode))))
-
-;; ruby-mode-hook 用の関数を定義
-(defun ruby-mode-hooks ()
-  (inf-ruby-keys)
-  ;;(ruby-electric-mode t)
-  (ruby-block-mode t))
-;; ruby-mode-hook に追加
-(add-hook 'ruby-mode-hook 'ruby-mode-hooks)
-;; #################
-
 ;;; anything
 ;; (auto-install-batch "anything")
 (when (require 'anything nil t)
@@ -318,6 +272,50 @@
   (global-set-key (kbd "C-x b") 'anything-for-files)
   )
 ;; end anything
+
+;; ##### Ruby ######
+;; 括弧の自動挿入
+;; (require 'ruby-electric nil t)
+;; end に対応する行のハイライト
+(when (require 'ruby-block nil t)
+  (setq ruby-block-highlight-toggle t))
+;; インタラクティブ Ruby を利用する
+(autoload 'run-ruby "inf-ruby"
+  "Run an inferior Ruby Process")
+(autoload 'inf-ruby-keys "inf-ruby"
+  "Set local key defs for inf-ruby in ruby-mode")
+
+;; align for ruby
+(require 'align)
+(add-to-list 'align-rules-list
+             '(ruby-comma-delimiter
+               (regexp . ",\\(\\s-*\\)[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+(add-to-list 'align-rules-list
+             '(ruby-hash-literal
+               (regexp . "\\(\\s-*\\)=>\\s-*[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+(add-to-list 'align-rules-list
+             '(ruby-assignment-literal
+               (regexp . "\\(\\s-*\\)=\\s-*[^# \t\n]")
+               (repeat . t)
+               (modes  . '(ruby-mode))))
+(add-to-list 'align-rules-list
+             '(ruby-xmpfilter-mark
+               (regexp . "\\(\\s-*\\)# => [^#\t\n]")
+               (repeat . nil)
+               (modes  . '(ruby-mode))))
+
+;; ruby-mode-hook 用の関数を定義
+(defun ruby-mode-hooks ()
+  (inf-ruby-keys)
+  ;;(ruby-electric-mode t)
+  (ruby-block-mode t))
+;; ruby-mode-hook に追加
+(add-hook 'ruby-mode-hook 'ruby-mode-hooks)
+;; #################
 
 ;; Haskell
 (when (load "haskell-site-file")
