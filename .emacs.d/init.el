@@ -71,10 +71,11 @@
 (cua-mode t)
 (setq cua-enable-cua-keys nil)
 
-;; 色設定
-;; (set-face-foreground 'default "white")
-;; (set-face-background 'default "black")
-;; (setq frame-background-mode 'dark)
+;; mode line color 
+(set-face-foreground 'modeline "white")
+(set-face-background 'modeline "#005fd7")
+(set-face-foreground 'mode-line-inactive "gray30")
+(set-face-background 'mode-line-inactive "gray85")
 
 ;; dmacro
 (defconst *dmacro-key* "\C-t" "繰返し指定キー")
@@ -140,6 +141,11 @@
 (global-linum-mode)
 (setq linum-format "%d ")
 
+;; save recent used file list
+(require 'recentf)
+(setq recentf-max-saved-items 1000)
+(recentf-mode 1)
+
 ;; auto-install の設定
 (cond
  ((null window-system)
@@ -149,7 +155,7 @@
     ;; EmacsWiki に登録されている elisp の名前を取得する
     (auto-install-update-emacswiki-package-name t)
     ;; 必要であればプロキシの設定を行う
-    ;;(setq url-proxy-services '(("http" . "localhost:8339")))
+    ;;(setq url-proxy-services '(("http" . "localhost:8080")))
     ;; install-elisp の関数を利用可能にする
     (auto-install-compatibility-setup)
     (setq ediff-window-setup-function 'ediff-setup-windows-plain))))
@@ -231,6 +237,7 @@
 
 ;;; anything
 ; (auto-install-batch "anything")
+(require 'anything-startup)
 (when (require 'anything nil t)
   (setq
    ;; kill-ring する時の要素の最小値
@@ -368,6 +375,11 @@
   ;; M-e を zenconding-expand-line にする
   (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
   )
+
+;; SVN
+(when (executable-find "svn")
+  (setq svn-status-verbose nil)
+  (autoload 'svn-status "psvn" "Run `svn status'." t))
 
 ;; Git
 (when (executable-find "git")
