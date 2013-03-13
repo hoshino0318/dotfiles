@@ -362,3 +362,6 @@
   (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
   )
 
+;; Git
+(when (executable-find "git")
+  (require 'egg nil t))
