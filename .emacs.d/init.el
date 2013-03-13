@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/03/12
+;; Update: 2013/03/13
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -154,6 +154,13 @@
     (auto-install-compatibility-setup)
     (setq ediff-window-setup-function 'ediff-setup-windows-plain))))
 
+;; package.el
+(when (require 'package nil t)
+  (add-to-list 'package-archives
+               '("marmalade" . "http://marmalade-repo.org/packages/"))
+  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+  (package-initialize))
+
 ;;; emacs technique bible
 ;; 試行錯誤用ファイルを開くための設定
 (require 'open-junk-file)
@@ -223,7 +230,7 @@
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;;; anything
-;; (auto-install-batch "anything")
+; (auto-install-batch "anything")
 (when (require 'anything nil t)
   (setq
    ;; kill-ring する時の要素の最小値
