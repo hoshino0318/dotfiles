@@ -136,15 +136,18 @@
 (global-set-key "\C-c\C-r" 'recompile)
 (global-set-key "\C-c'"    'next-error)
 
-;; 行番号表示
+;;; linum
 (require 'linum)
 (global-linum-mode)
 (setq linum-format "%d ")
 
-;; save recent used file list
+;;; recentf
 (require 'recentf)
 (setq recentf-max-saved-items 1000)
 (recentf-mode 1)
+;; never delete recentf history file
+(custom-set-variables
+ '(recentf-auto-cleanup (quote never)))
 
 ;; auto-install の設定
 (cond
