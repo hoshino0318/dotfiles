@@ -71,7 +71,7 @@
 (cua-mode t)
 (setq cua-enable-cua-keys nil)
 
-;; mode line color 
+;; mode line color
 (set-face-foreground 'modeline "white")
 (set-face-background 'modeline "#005fd7")
 (set-face-foreground 'mode-line-inactive "gray30")
@@ -145,9 +145,7 @@
 (require 'recentf)
 (setq recentf-max-saved-items 1000)
 (recentf-mode 1)
-;; never delete recentf history file
-(custom-set-variables
- '(recentf-auto-cleanup (quote never)))
+(custom-set-variables '(recentf-save-file "~/.emacs.d/.recentf"))
 
 ;; auto-install の設定
 (cond
