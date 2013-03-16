@@ -2,6 +2,7 @@
 .emacs.d/ac-comphist.dat
 .emacs.d/auto-save-list/*
 .emacs.d/elpa
+.emacs.d/.recentf
 .emacs.d/tramp
 *.elc
 
