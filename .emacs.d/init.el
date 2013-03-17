@@ -119,12 +119,14 @@
 
 ;; 現在行のハイライト
 (defface my-hl-line-face
-  ;; 背景が dark ならば背景色を紺に
+  ;; 背景が dark ならば背景色を orange red に
   '((((class color)(background dark))
-     (:background "NavyBlue" t))
-    ;; 背景が light ならば背景色を緑に
+     (:background "orange red" t)
+     )
+    ;; 背景が light ならば背景色をorange に
     (((class color)(background light))
-     (:background "LightGoldenrodYellow" t))
+     (:background "orange" t)
+     )
     (t (:bold t)))
   "hl-line's my face")
 (setq hl-line-face 'my-hl-line-face)
