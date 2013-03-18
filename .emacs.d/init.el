@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/03/13
+;; Update: 2013/03/18
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -119,9 +119,9 @@
 
 ;; 現在行のハイライト
 (defface my-hl-line-face
-  ;; 背景が dark ならば背景色を orange red に
+  ;; 背景が dark ならば背景色を #87005f に
   '((((class color)(background dark))
-     (:background "orange red" t)
+     (:background "#87005f" t)
      )
     ;; 背景が light ならば背景色をorange に
     (((class color)(background light))
