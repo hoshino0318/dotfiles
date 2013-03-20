@@ -147,7 +147,8 @@
 (require 'recentf)
 (setq recentf-max-saved-items 1000)
 (recentf-mode 1)
-(custom-set-variables '(recentf-save-file "~/.emacs.d/.recentf"))
+(custom-set-variables
+ '(recentf-save-file "~/.emacs.d/.recentf"))
 
 ;; auto-install の設定
 (cond
@@ -404,3 +405,9 @@
 ;; Git
 (when (executable-find "git")
   (require 'egg nil t))
+
+;; SQL
+(eval-after-load "sql"
+  (load-library "sql-indent"))
+(custom-set-variables
+ '(sql-indent-offset 2))
