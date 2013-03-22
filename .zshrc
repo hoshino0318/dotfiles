@@ -1,4 +1,6 @@
-# Created by newuser for 4.3.1
+# .zshrc
+# Author:  Tatsuya Hoshino
+# Update: 2013/03/14
 
 local BLACK=$'%{e[1;30m%}'
 local RED=$'%{e[1;31m%}'
@@ -10,8 +12,6 @@ local AQUA=$'%{e[1;36m%}'
 local WHITE=$'%{e[1;37m%}'
 local DEFAULT=$'%{e[1;m%}'
 
-## Default shell configuration
-#
 # set prompt
 #
 autoload colors
@@ -102,14 +102,8 @@ export PAGER="lv -c"
 setopt nobeep
 setopt nolistbeep
 
-# Proxy の設定があれば読み込む
-[ -f ~/.proxy ] && source ~/.proxy
-
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-# rvm setting
-#rvm gemset use ruby1.9.3-rails3.1.3
 
 # less に色付け
 export LESS='-R'
@@ -118,17 +112,5 @@ export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 # 個別の path 設定があれば読み込む
 [ -f ~/.path ] && source ~/.path
 
-zle -N x-copy-region-as-kill
-x-kill-region () {
-  zle kill-region
-  print -rn $CUTBUFFER | putclip
-}
-zle -N x-kill-region
-x-yank () {
-  CUTBUFFER=$(getclip)
-  zle yank
-}
-zle -N x-yank
-bindkey -e '^[w' x-kill-region
-bindkey -e '^W' x-kill-region
-bindkey -e '^Y' x-yank
+# Proxy の設定があれば読み込む
+[ -f ~/.proxy ] && source ~/.proxy

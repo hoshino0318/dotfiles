@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/03/13
+;; Update: 2013/03/18
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -119,9 +119,9 @@
 
 ;; 現在行のハイライト
 (defface my-hl-line-face
-  ;; 背景が dark ならば背景色を orange red に
+  ;; 背景が dark ならば背景色を #87005f に
   '((((class color)(background dark))
-     (:background "orange red" t)
+     (:background "#87005f" t)
      )
     ;; 背景が light ならば背景色をorange に
     (((class color)(background light))
@@ -147,7 +147,8 @@
 (require 'recentf)
 (setq recentf-max-saved-items 1000)
 (recentf-mode 1)
-(custom-set-variables '(recentf-save-file "~/.emacs.d/.recentf"))
+(custom-set-variables
+ '(recentf-save-file "~/.emacs.d/.recentf"))
 
 ;; auto-install の設定
 (cond
@@ -322,6 +323,23 @@
                (repeat . nil)
                (modes  . '(ruby-mode))))
 
+;; fix ruby mode indent
+(setq ruby-deep-indent-paren-style nil)
+(defadvice ruby-indent-line (after unindent-closing-paren activate)
+  (let ((column (current-column))
+        indent offset)
+    (save-excursion
+      (back-to-indentation)
+      (let ((state (syntax-ppss)))
+        (setq offset (- column (current-column)))
+        (when (and (eq (char-after) ?\))
+                   (not (zerop (car state))))
+          (goto-char (cadr state))
+          (setq indent (current-indentation)))))
+    (when indent
+      (indent-line-to indent)
+      (when (> offset 0) (forward-char offset)))))
+
 ;; ruby-mode-hook 用の関数を定義
 (defun ruby-mode-hooks ()
   (inf-ruby-keys)
@@ -387,3 +405,9 @@
 ;; Git
 (when (executable-find "git")
   (require 'egg nil t))
+
+;; SQL
+(eval-after-load "sql"
+  (load-library "sql-indent"))
+(custom-set-variables
+ '(sql-indent-offset 2))
