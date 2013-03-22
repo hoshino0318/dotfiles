@@ -44,6 +44,19 @@ set wildmenu
 " 行末の空白を自動で消す
 autocmd BufWritePre * :%s/\s\+$//e
 
+" カーソル行をハイライト
+set cursorline
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+  autocmd! cch
+  autocmd WinLeave * set nocursorline
+  autocmd WinEnter,BufRead * set cursorline
+augroup END
+
+hi clear CursorLine
+hi CursorLine gui=underline
+highlight CursorLine ctermbg=black guibg=black
+
 " undodir
 if has('persistent_undo')
   set undodir=~/.vimundo
