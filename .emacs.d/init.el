@@ -123,9 +123,9 @@
   '((((class color)(background dark))
      (:background "#87005f" t)
      )
-    ;; 背景が light ならば背景色をorange に
+    ;; 背景が light ならば背景色を#ffdfef に
     (((class color)(background light))
-     (:background "orange" t)
+     (:background "#ffdfef" t)
      )
     (t (:bold t)))
   "hl-line's my face")

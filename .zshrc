@@ -102,6 +102,9 @@ export PAGER="lv -c"
 setopt nobeep
 setopt nolistbeep
 
+# インクリメンタルサーチに色を付ける
+zle_highlight=(default:fg=white isearch:bold,fg=red)
+
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
