@@ -383,6 +383,10 @@
 (when (require 'haml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
 
+;; less
+(when (require 'less-css-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.less$\\'" . less-css-mode)))
+
 ;; Yaml
 (when (require 'yaml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
