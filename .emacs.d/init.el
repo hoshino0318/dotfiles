@@ -361,7 +361,8 @@
 (add-hook 'java-mode-hook
           (lambda ()
             (setq indent-tabs-mode nil)
-            (setq c-basic-offset 2)))
+            (setq c-basic-offset 2)
+            (c-set-offset 'topmost-intro-cont 0)))
 
 ;; JavaScript
 (add-hook 'js2-mode-hook
@@ -381,6 +382,10 @@
 ;; Haml
 (when (require 'haml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
+
+;; less
+(when (require 'less-css-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.less$\\'" . less-css-mode)))
 
 ;; Yaml
 (when (require 'yaml-mode nil t)
