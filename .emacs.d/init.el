@@ -352,7 +352,8 @@
 ;; ruby-mode-hook に追加
 (add-hook 'ruby-mode-hook 'ruby-mode-hooks)
 ;; extensions
-(add-to-list 'auto-mode-alist '("Gemfiles" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.ru$"  . ruby-mode))
 ;; #################
 
 ;; Haskell
