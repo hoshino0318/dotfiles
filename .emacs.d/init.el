@@ -347,6 +347,8 @@
   (ruby-block-mode t))
 ;; ruby-mode-hook に追加
 (add-hook 'ruby-mode-hook 'ruby-mode-hooks)
+;; extensions
+(add-to-list 'auto-mode-alist '("Gemfiles" . ruby-mode))
 ;; #################
 
 ;; Haskell
@@ -383,9 +385,9 @@
 (when (require 'haml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
 
-;; less
+;; Less
 (when (require 'less-css-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.less$\\'" . less-css-mode)))
+  (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode)))
 
 ;; Yaml
 (when (require 'yaml-mode nil t)
