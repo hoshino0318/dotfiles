@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/03/18
+;; Update: 2013/04/19
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -54,6 +54,10 @@
  ((null window-system)
   (require 'color-theme-molokai)
   (color-theme-molokai)
+  ;; customize
+  (set-face-foreground 'font-lock-function-name-face "#5EC84E")
+  (set-face-foreground 'font-lock-type-face "#FF8700")
+  (set-face-foreground 'font-lock-string-face "#CCCCAC")
   ))
 
 ;; ターミナル以外の場合
@@ -119,13 +123,13 @@
 
 ;; 現在行のハイライト
 (defface my-hl-line-face
-  ;; 背景が dark ならば背景色を #87005f に
+  ;; 背景が dark ならば背景色を #87005F に
   '((((class color)(background dark))
-     (:background "#87005f" t)
+     (:background "#87005F" t)
      )
-    ;; 背景が light ならば背景色を#ffdfef に
+    ;; 背景が light ならば背景色を#FFDFEF に
     (((class color)(background light))
-     (:background "#ffdfef" t)
+     (:background "#FFDFEF" t)
      )
     (t (:bold t)))
   "hl-line's my face")
