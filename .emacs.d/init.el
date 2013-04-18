@@ -54,12 +54,14 @@
  ((null window-system)
   (require 'color-theme-molokai)
   (color-theme-molokai)
+  ;; customize
+  (set-face-foreground 'font-lock-function-name-face "#5EC84E")
+  (set-face-foreground 'font-lock-type-face "#FF8700")
+  (set-face-foreground 'font-lock-string-face "#CCCCAC")
   ))
 
 ;; ターミナル以外の場合
 (when window-system
-  ;; tool-bar を非表示
-  (tool-bar-mode 0)
   ;; C-z を undo にする
   (define-key global-map (kbd "C-z") 'undo)
   )
@@ -81,6 +83,9 @@
 (defconst *dmacro-key* "\C-t" "繰返し指定キー")
 (global-set-key *dmacro-key* 'dmacro-exec)
 (autoload 'dmacro-exec "dmacro" nil t)
+
+;; tool-bar を非表示
+(tool-bar-mode 0)
 
 ;; 最大限色付け
 (setq font-lock-maximum-decoration t)
