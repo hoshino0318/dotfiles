@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/04/19
+;; Update: 2013/04/26
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -393,6 +393,10 @@
 ;; Less
 (when (require 'less-css-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode)))
+
+;; Slim
+(when (require 'slim-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.slim$" . slim-mode)))
 
 ;; Yaml
 (when (require 'yaml-mode nil t)
