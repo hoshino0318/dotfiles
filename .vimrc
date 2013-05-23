@@ -86,6 +86,7 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundleLazy 'dag/vim2hs'
 NeoBundleLazy 'derekwyatt/vim-scala'
+NeoBundleLazy 'elzr/vim-json'
 NeoBundleLazy 'vim-coffee-script'
 NeoBundleLazy 'ZenCoding.vim'
 
