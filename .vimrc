@@ -102,3 +102,6 @@ setlocal omnifunc=syntaxcomplete#Complete
 
 " neocomplcache
 let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
+
+" vim-json
+au! BufRead,BufNewFile *.json set filetype=json
