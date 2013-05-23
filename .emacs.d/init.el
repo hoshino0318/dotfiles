@@ -58,6 +58,7 @@
   (set-face-foreground 'font-lock-function-name-face "#5EC84E")
   (set-face-foreground 'font-lock-type-face "#FF8700")
   (set-face-foreground 'font-lock-string-face "#CCCCAC")
+  (set-face-foreground 'font-lock-comment-face "#A6A4A7")
   ))
 
 ;; ターミナル以外の場合
