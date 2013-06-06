@@ -35,6 +35,9 @@ set smartcase
 " command complement
 set wildmenu
 
+" command line complement
+set wildmode=list,full
+
 " delete trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
 
