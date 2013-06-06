@@ -105,3 +105,8 @@ let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
 
 " vim-json
 au! BufRead,BufNewFile *.json set filetype=json
+
+" Unite key bindings
+noremap <C-i> :Unite buffer<CR>
+noremap <C-m> :Unite file_mru<CR>
+noremap <C-w> :Unite -buffer-name=file file<CR>
