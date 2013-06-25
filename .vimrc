@@ -105,4 +105,4 @@ au! BufRead,BufNewFile *.json set filetype=json
 " Unite key bindings
 noremap <C-i> :Unite buffer<CR>
 noremap <C-m> :Unite file_mru<CR>
-noremap <C-w> :Unite -buffer-name=file file<CR>
+noremap <C-k> :Unite -buffer-name=file file<CR>
