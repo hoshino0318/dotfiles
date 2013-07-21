@@ -373,11 +373,8 @@
             (c-set-offset 'topmost-intro-cont 0)))
 
 ;; JavaScript
-(add-hook 'js2-mode-hook
-          #'(lambda()
-              (when (require 'js2-mode nil t)
-                (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-                (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode)))))
+(when (require 'js2-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.\\(js\\|json\\)$" . js2-mode)))
 
 ;; Scala
 (when (require 'scala-mode-auto)
