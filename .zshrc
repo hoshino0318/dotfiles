@@ -22,11 +22,20 @@ colors
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '%b'
 zstyle ':vcs_info:*' actionformats '%b|%a'
-precmd () {
-    psvar=()
-    LANG=en_US.UTF-8 vcs_info
-    [ -n "$vcs_info_msg_0_" ] && psvar[1]="$vcs_info_msg_0_"
-}
+# In the case of CYGWIN,
+# precmd don't works because it's too slow.
+KERNEL_NAME=`uname -s`
+case $KERNEL_NAME in
+  CYGWIN*)
+    ;;
+  *)
+    precmd () {
+        psvar=()
+        LANG=en_US.UTF-8 vcs_info
+        [ -n "$vcs_info_msg_0_" ] && psvar[1]="$vcs_info_msg_0_"
+    }
+    ;;
+esac
 
 # colour prompt
 # see: http://yonchu.hatenablog.com/entry/2012/10/20/044603
