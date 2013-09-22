@@ -51,9 +51,9 @@ case ${UID} in
     PROMPT="%F{033}[${USER}@${HOST%%.*} %1~%F{208}%1(v|(%1v)|)%F{033}]%(!.#.$) %{${reset_color}%}"
     PROMPT2="%F{033}%_%%%{${reset_color}%} "
     SPROMPT="%F{162}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-        PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    ;;
+    #[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+    #    PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+    #;;
 esac
 
 # alias
