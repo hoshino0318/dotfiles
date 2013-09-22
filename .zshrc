@@ -1,6 +1,6 @@
 # .zshrc
 # Author:  Tatsuya Hoshino
-# Update: 2013/03/14
+# Update: 2013/09/21
 
 local BLACK=$'%{e[1;30m%}'
 local RED=$'%{e[1;31m%}'
@@ -16,6 +16,20 @@ local DEFAULT=$'%{e[1;m%}'
 #
 autoload colors
 colors
+
+# git branch setting
+# see: http://blog.hifumi.info/mac/custom-zsh-prompt/
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' formats '%b'
+zstyle ':vcs_info:*' actionformats '%b|%a'
+precmd () {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [ -n "$vcs_info_msg_0_" ] && psvar[1]="$vcs_info_msg_0_"
+}
+
+# colour prompt
+# see: http://yonchu.hatenablog.com/entry/2012/10/20/044603
 case ${UID} in
 0)
     PROMPT="%B%{${fg[cyan]}%}%/#%{${reset_color}%}%b "
@@ -25,13 +39,12 @@ case ${UID} in
         PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
     ;;
 *)
-    # PROMPT="%{${fg[cyan]}%}%/%%%{${reset_color}%} "
-    PROMPT="%{${fg[cyan]}%}[${USER}@${HOST%%.*} %1~]%(!.#.$) %{${reset_color}%}%b"
-    PROMPT2="%{${fg[cyan]}%}%_%%%{${reset_color}%} "
-    SPROMPT="%{${fg[cyan]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-    #[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-    #    PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    #;;
+    PROMPT="%F{033}[${USER}@${HOST%%.*} %1~%F{208}%1(v|(%1v)|)%F{033}]%(!.#.$) %{${reset_color}%}"
+    PROMPT2="%F{033}%_%%%{${reset_color}%} "
+    SPROMPT="%F{162}%r is correct? [n,y,a,e]:%{${reset_color}%} "
+    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+        PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+    ;;
 esac
 
 # alias
@@ -104,7 +117,7 @@ setopt nobeep
 setopt nolistbeep
 
 # インクリメンタルサーチに色を付ける
-zle_highlight=(default:fg=white isearch:bold,fg=red)
+zle_highlight=(default:fg=white isearch:bold,fg=green)
 
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
