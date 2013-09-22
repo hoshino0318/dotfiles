@@ -106,3 +106,10 @@ au! BufRead,BufNewFile *.json set filetype=json
 noremap <C-i> :Unite buffer<CR>
 noremap <C-m> :Unite file_mru<CR>
 noremap <C-k> :Unite -buffer-name=file file<CR>
+
+" Go lang
+if (isdirectory(expand('$GOROOT')))
+  NeoBundle 'go', {'type' : 'nosync', 'base' : '~/.vim/neobundle'}
+endif
+autocmd BufNewFile,BufRead *.go setlocal filetype=go
+autocmd FileType go setlocal tabstop=2 shiftwidth=2

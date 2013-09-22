@@ -21,3 +21,10 @@ echo;
 : [Info] Vim NeoBundleInstall
 vim -S .vim/neobundleinstall.vim
 echo;
+
+: [Info] Vim Set golang
+if [ ! -e $HOME/.vim/neobundle/go ]; then
+  if [ -n "$GOROOT" ]; then
+    ln -s $GOROOT/misc/vim $HOME/.vim/neobundle/go
+  fi
+fi
