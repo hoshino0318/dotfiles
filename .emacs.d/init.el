@@ -63,11 +63,13 @@
 
 ;; ターミナル以外の場合
 (when window-system
-  ;; tool-bar を非表示
-  (tool-bar-mode 0)
   ;; C-z を undo にする
   (define-key global-map (kbd "C-z") 'undo)
   )
+
+;; bar を非表示
+(tool-bar-mode 0)
+(menu-bar-mode 0)
 
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
@@ -108,10 +110,6 @@
 ;; emacs-nav
 (require 'nav)
 (global-set-key "\C-x\C-d" 'nav-toggle)
-
-;; cua-mode
-(cua-mode t)
-(setq cua-enable-cua-keys nil)
 
 ;; paren-mode : 対応する括弧を強調して表示する
 (setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
