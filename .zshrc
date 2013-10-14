@@ -48,8 +48,9 @@ case ${UID} in
 esac
 
 # alias
-alias rm="rm -i"
+alias cp="cp -i"
 alias mv="mv -i"
+alias rm="rm -i"
 #alias java="/usr/java/default/bin/java"
 #alias javac="/usr/java/default/bin/javac"
 # OS X に関する設定
