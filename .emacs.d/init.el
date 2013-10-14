@@ -392,6 +392,10 @@
 (when (require 'less-css-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode)))
 
+;; Markdown
+(when (require 'markdown-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode)))
+
 ;; Slim
 (when (require 'slim-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.slim$" . slim-mode)))
