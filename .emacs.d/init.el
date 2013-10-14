@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/04/26
+;; Update: 2013/09/26
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -63,11 +63,13 @@
 
 ;; ターミナル以外の場合
 (when window-system
-  ;; tool-bar を非表示
-  (tool-bar-mode 0)
   ;; C-z を undo にする
   (define-key global-map (kbd "C-z") 'undo)
   )
+
+;; bar を非表示
+(tool-bar-mode 0)
+(menu-bar-mode 0)
 
 ;; 起動時の画面はいらない
 (setq inhibit-startup-message t)
@@ -108,10 +110,6 @@
 ;; emacs-nav
 (require 'nav)
 (global-set-key "\C-x\C-d" 'nav-toggle)
-
-;; cua-mode
-(cua-mode t)
-(setq cua-enable-cua-keys nil)
 
 ;; paren-mode : 対応する括弧を強調して表示する
 (setq show-paren-delay 0) ; 表示までの秒数。初期値は 0.125
@@ -156,25 +154,25 @@
  '(recentf-save-file "~/.emacs.d/.recentf"))
 
 ;; auto-install の設定
-(cond
- ((null window-system)
-  (when (require 'auto-install nil t)
-    ;; インストールディレクトリを設定する 初期値は ~/.emacs.d/auto-install
-    (setq auto-install-directory "~/.emacs.d/elisp/")
-    ;; EmacsWiki に登録されている elisp の名前を取得する
-    (auto-install-update-emacswiki-package-name t)
-    ;; 必要であればプロキシの設定を行う
-    ;;(setq url-proxy-services '(("http" . "localhost:8080")))
-    ;; install-elisp の関数を利用可能にする
-    (auto-install-compatibility-setup)
-    (setq ediff-window-setup-function 'ediff-setup-windows-plain))))
+;; (cond
+;;  ((null window-system)
+;;   (when (require 'auto-install nil t)
+;;     ;; インストールディレクトリを設定する 初期値は ~/.emacs.d/auto-install
+;;     (setq auto-install-directory "~/.emacs.d/elisp/")
+;;     ;; EmacsWiki に登録されている elisp の名前を取得する
+;;     (auto-install-update-emacswiki-package-name t)
+;;     ;; 必要であればプロキシの設定を行う
+;;     ;;(setq url-proxy-services '(("http" . "localhost:8080")))
+;;     ;; install-elisp の関数を利用可能にする
+;;     (auto-install-compatibility-setup)
+;;     (setq ediff-window-setup-function 'ediff-setup-windows-plain))))
 
 ;; package.el
-(when (require 'package nil t)
-  (add-to-list 'package-archives
-               '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
-  (package-initialize))
+;; (when (require 'package nil t)
+;;   (add-to-list 'package-archives
+;;                '("marmalade" . "http://marmalade-repo.org/packages/"))
+;;   (add-to-list 'package-archives '("ELPA" . "http://tromey.com/elpa/"))
+;;   (package-initialize))
 
 ;;; emacs technique bible
 ;; 試行錯誤用ファイルを開くための設定
