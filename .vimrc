@@ -82,7 +82,7 @@ NeoBundle 'tomtom/tcomment_vim'
 NeoBundleLazy 'dag/vim2hs'
 NeoBundleLazy 'derekwyatt/vim-scala'
 NeoBundleLazy 'elzr/vim-json'
-NeoBundleLazy 'slim-template/vim-slim'
+NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'mattn/emmet-vim'
 NeoBundleLazy 'vim-coffee-script'
 
