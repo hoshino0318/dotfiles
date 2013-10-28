@@ -22,11 +22,20 @@ colors
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats '%b'
 zstyle ':vcs_info:*' actionformats '%b|%a'
-precmd () {
-    psvar=()
-    LANG=en_US.UTF-8 vcs_info
-    [ -n "$vcs_info_msg_0_" ] && psvar[1]="$vcs_info_msg_0_"
-}
+# In the case of CYGWIN,
+# precmd don't works because it's too slow.
+KERNEL_NAME=`uname -s`
+case $KERNEL_NAME in
+  CYGWIN*)
+    ;;
+  *)
+    precmd () {
+        psvar=()
+        LANG=en_US.UTF-8 vcs_info
+        [ -n "$vcs_info_msg_0_" ] && psvar[1]="$vcs_info_msg_0_"
+    }
+    ;;
+esac
 
 # colour prompt
 # see: http://yonchu.hatenablog.com/entry/2012/10/20/044603
@@ -42,15 +51,16 @@ case ${UID} in
     PROMPT="%F{033}[${USER}@${HOST%%.*} %1~%F{208}%1(v|(%1v)|)%F{033}]%(!.#.$) %{${reset_color}%}"
     PROMPT2="%F{033}%_%%%{${reset_color}%} "
     SPROMPT="%F{162}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
-        PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-    ;;
+    #[ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
+    #    PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
+    #;;
 esac
 
 # alias
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
+alias tree="tree -C"
 #alias java="/usr/java/default/bin/java"
 #alias javac="/usr/java/default/bin/javac"
 # OS X に関する設定
@@ -105,6 +115,8 @@ setopt auto_list
 
 # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完
 setopt auto_menu
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[-_.]=**'
 
 # cd をしたときにll を実行する
 function chpwd() { ls }
