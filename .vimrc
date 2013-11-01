@@ -79,6 +79,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'Align',
 NeoBundleLazy 'dag/vim2hs'
 NeoBundleLazy 'derekwyatt/vim-scala'
 NeoBundleLazy 'elzr/vim-json'
