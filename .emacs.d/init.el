@@ -63,12 +63,12 @@
 
 ;; ターミナル以外の場合
 (when window-system
+  (tool-bar-mode 0)
   ;; C-z を undo にする
   (define-key global-map (kbd "C-z") 'undo)
   )
 
 ;; bar を非表示
-(tool-bar-mode 0)
 (menu-bar-mode 0)
 
 ;; 起動時の画面はいらない
