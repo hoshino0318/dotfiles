@@ -116,8 +116,6 @@ setopt auto_list
 # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完
 setopt auto_menu
 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[-_.]=**'
-
 # cd をしたときにll を実行する
 function chpwd() { ls }
 
