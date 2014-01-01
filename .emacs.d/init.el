@@ -63,12 +63,12 @@
 
 ;; ターミナル以外の場合
 (when window-system
+  (tool-bar-mode 0)
   ;; C-z を undo にする
   (define-key global-map (kbd "C-z") 'undo)
   )
 
 ;; bar を非表示
-(tool-bar-mode 0)
 (menu-bar-mode 0)
 
 ;; 起動時の画面はいらない
@@ -389,6 +389,10 @@
 ;; Less
 (when (require 'less-css-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode)))
+
+;; Markdown
+(when (require 'markdown-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode)))
 
 ;; Slim
 (when (require 'slim-mode nil t)

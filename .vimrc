@@ -79,11 +79,14 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'Align',
 NeoBundleLazy 'dag/vim2hs'
 NeoBundleLazy 'derekwyatt/vim-scala'
 NeoBundleLazy 'elzr/vim-json'
+NeoBundleLazy 'mattn/emmet-vim'
 NeoBundleLazy 'vim-coffee-script'
-NeoBundleLazy 'ZenCoding.vim'
 
 filetype plugin indent on
 " ### END NeoBundle ###
@@ -105,3 +108,10 @@ au! BufRead,BufNewFile *.json set filetype=json
 noremap <C-i> :Unite buffer<CR>
 noremap <C-m> :Unite file_mru<CR>
 noremap <C-k> :Unite -buffer-name=file file<CR>
+
+" Go lang
+if (isdirectory(expand('$GOROOT')))
+  NeoBundle 'go', {'type' : 'nosync', 'base' : '~/.vim/neobundle'}
+endif
+autocmd BufNewFile,BufRead *.go setlocal filetype=go
+autocmd FileType go setlocal tabstop=2 shiftwidth=2
