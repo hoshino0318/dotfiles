@@ -1,4 +1,4 @@
-tap phinze/homebrew-cask || true
+tap phinze/homebrew-cask
 
 install lv
 install tree
@@ -10,4 +10,6 @@ cask install evernote
 cask install firefox
 cask install google-chrome
 cask install iterm2
+cask install vagrant
+cask install virtualbox
 cask install yorufukurou
