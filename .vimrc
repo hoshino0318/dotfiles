@@ -79,11 +79,12 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'tomtom/tcomment_vim'
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'Align',
 NeoBundleLazy 'dag/vim2hs'
 NeoBundleLazy 'derekwyatt/vim-scala'
 NeoBundleLazy 'elzr/vim-json'
-NeoBundle 'slim-template/vim-slim'
 NeoBundleLazy 'mattn/emmet-vim'
 NeoBundleLazy 'vim-coffee-script'
 

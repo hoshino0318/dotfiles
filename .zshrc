@@ -57,6 +57,7 @@ case ${UID} in
 esac
 
 # alias
+alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 alias tree="tree -C"
