@@ -52,6 +52,9 @@ hi clear CursorLine
 hi CursorLine gui=underline
 highlight CursorLine ctermbg=black guibg=black
 
+" tmux (background color erase)
+set t_ut=
+
 " undodir
 if has('persistent_undo')
   set undodir=~/.vimundo
