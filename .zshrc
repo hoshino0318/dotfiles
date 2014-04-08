@@ -126,6 +126,11 @@ export PAGER="lv -c"
 setopt nobeep
 setopt nolistbeep
 
+## cd 時に自動で push
+setopt auto_pushd
+## 同じディレクトリを pushd しない
+setopt pushd_ignore_dups
+
 # インクリメンタルサーチに色を付ける
 zle_highlight=(default:fg=white isearch:bold,fg=green)
 
