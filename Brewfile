@@ -1,6 +1,7 @@
 tap phinze/homebrew-cask
 
 install lv
+install tmux
 install tree
 install zsh
 

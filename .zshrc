@@ -146,3 +146,11 @@ export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 
 # Proxy の設定があれば読み込む
 [ -f ~/.proxy ] && source ~/.proxy
+
+# zsh completion
+for i in /usr/local/share/zsh/site-functions/*
+do
+  if [ -r "$i" ]; then
+    . $i
+  fi
+done
