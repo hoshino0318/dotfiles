@@ -148,9 +148,11 @@ export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 [ -f ~/.proxy ] && source ~/.proxy
 
 # zsh completion
-for i in /usr/local/share/zsh/site-functions/*
-do
-  if [ -r "$i" ]; then
-    . $i
-  fi
-done
+if [ -d /usr/local/share/zsh/site-functions ]; then
+  for i in /usr/local/share/zsh/site-functions/*
+  do
+    if [ -r "$i" ]; then
+      . $i
+    fi
+  done
+fi
