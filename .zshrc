@@ -139,7 +139,9 @@ zle_highlight=(default:fg=white isearch:bold,fg=green)
 
 # less に色付け
 export LESS='-R'
-export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
+if [ -f /usr/bin/src-hilite-lesspipe.sh ]; then
+  export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
+fi
 
 # 個別の path 設定があれば読み込む
 [ -f ~/.path ] && source ~/.path
