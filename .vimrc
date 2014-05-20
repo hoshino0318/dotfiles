@@ -78,6 +78,7 @@ endif
 
 NeoBundle 'molokai'
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'groenewege/vim-less'
