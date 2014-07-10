@@ -1,3 +1,6 @@
 [submodule "neobundle.vim"]
 	path = neobundle.vim
 	url = https://github.com/Shougo/neobundle.vim.git
+[submodule "zaw"]
+	path = zaw
+	url = https://github.com/zsh-users/zaw.git
