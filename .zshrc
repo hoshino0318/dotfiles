@@ -159,6 +159,9 @@ if [ -d /usr/local/share/zsh/site-functions ]; then
   done
 fi
 
+# zaw
+source ~/dotfiles/zaw/zaw.zsh
+
 # peco function
 # see: http://weblog.bulknews.net/post/89635306479/ghq-peco-percol
 function peco-src () {
