@@ -77,9 +77,9 @@ if has('vim_starting')
 endif
 
 NeoBundle 'molokai'
+NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'groenewege/vim-less'
 NeoBundle 'tomtom/tcomment_vim'

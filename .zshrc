@@ -150,14 +150,17 @@ fi
 [ -f ~/.proxy ] && source ~/.proxy
 
 # zsh completion
-if [ -d /usr/local/share/zsh/site-functions ]; then
-  for i in /usr/local/share/zsh/site-functions/*
+if [ -d /usr/local/share/zsh/site-functions -a "$(ls /usr/local/share/zsh/site-functions/ | wc -l)" -ne 0 ]; then
+  for i in /usr/local/share/zsh/site-functions/*.sh
   do
     if [ -r "$i" ]; then
       . $i
     fi
   done
 fi
+
+# zaw
+source ~/dotfiles/zaw/zaw.zsh
 
 # peco function
 # see: http://weblog.bulknews.net/post/89635306479/ghq-peco-percol
