@@ -116,7 +116,7 @@ setopt auto_list
 # 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完
 setopt auto_menu
 
-# cd をしたときにll を実行する
+# cd をしたときにls を実行する
 function chpwd() { ls }
 
 # Pager
@@ -137,6 +137,13 @@ zle_highlight=(default:fg=white isearch:bold,fg=green)
 # Colored man pages
 export MANPAGER='less -R'
 function man() {
+    # mb begin blinking
+    # md begin bold
+    # me end mode
+    # se end standout-mode
+    # so begin standout-mode - info box
+    # ue end underline
+    # us begin underline
     env LESS_TERMCAP_mb=$'\E[01;31m' \
     LESS_TERMCAP_md=$'\E[01;38;5;74m' \
     LESS_TERMCAP_me=$'\E[0m' \
@@ -146,6 +153,9 @@ function man() {
     LESS_TERMCAP_us=$'\E[04;38;5;146m' \
     man "$@"
 }
+# Colored grep
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='01;38;5;74'
 
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
