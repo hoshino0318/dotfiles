@@ -175,7 +175,7 @@ fi
 # zsh completion
 if [ -d /usr/local/share/zsh/site-functions ]; then
   if [ "$(ls /usr/local/share/zsh/site-functions/ | wc -l)" -ne 0 ]; then
-    for i in /usr/local/share/zsh/site-functions/*.sh
+    for i in /usr/local/share/zsh/site-functions/*
     do
       if [ -r "$i" ]; then
         . $i
