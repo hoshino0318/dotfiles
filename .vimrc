@@ -85,6 +85,7 @@ NeoBundle 'groenewege/vim-less'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'slim-template/vim-slim'
 NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'Align',
 NeoBundleLazy 'dag/vim2hs'
 NeoBundleLazy 'derekwyatt/vim-scala'
