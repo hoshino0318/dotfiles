@@ -12,6 +12,11 @@
         (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
             (normal-top-level-add-subdirs-to-load-path))))))
 
+(defvar emacs23-p (<= emacs-major-version 23))  ; 23 以下
+(defvar emacs24-p (>= emacs-major-version 24))  ; 24 以上
+(defvar darwin-p (eq system-type 'darwin))      ; Mac OS X 用
+(defvar nt-p (eq system-type 'windows-nt))      ; Windows 用
+
 ;; 引数のディレクトリとそのサブディレクトリを load-path に追加
 (add-to-load-path "elisp" "conf")
 
@@ -79,8 +84,8 @@
 (setq cua-enable-cua-keys nil)
 
 ;; mode line color
-(set-face-foreground 'modeline "white")
-(set-face-background 'modeline "#005fd7")
+(set-face-foreground 'mode-line "white")
+(set-face-background 'mode-line "#005fd7")
 (set-face-foreground 'mode-line-inactive "gray30")
 (set-face-background 'mode-line-inactive "gray85")
 
@@ -232,10 +237,11 @@
 (init-loader-load "~/.emacs.d/conf") ; 設定ファイルがあるディレクトリを指定
 
 ;; redo+ の設定
-(when (require 'redo+ nil t)
-  ;; C-M-_' にリドゥに割り当てる
-  (define-key global-map (kbd "C-M-_") 'redo)
-  )
+(when emacs23-p
+  (when (require 'redo+ nil t)
+    ;; C-M-_' にリドゥに割り当てる
+    (define-key global-map (kbd "C-M-_") 'redo)
+    ))
 
 ;; shell-mode でエスケープを綺麗に表示
 (autoload 'ansi-color-for-comint-mode-on "ansi-color"
