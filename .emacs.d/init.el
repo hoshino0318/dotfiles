@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2013/09/26
+;; Update: 2014/11/01
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -54,17 +54,32 @@
 (define-key global-map (kbd "C-M-l") 'windmove-right)
 (define-key global-map (kbd "C-M-h") 'windmove-left)
 
+; (when emacs23-p
+;   (when (require 'redo+ nil t)
+;     ;; C-M-_' にリドゥに割り当てる
+;     (define-key global-map (kbd "C-M-_") 'redo)
+;     ))
 ;; ターミナルの場合、molokai を使う
 (cond
- ((null window-system)
-  (require 'color-theme-molokai)
-  (color-theme-molokai)
-  ;; customize
-  (set-face-foreground 'font-lock-function-name-face "#5EC84E")
-  (set-face-foreground 'font-lock-type-face "#FF8700")
-  (set-face-foreground 'font-lock-string-face "#CCCCAC")
-  (set-face-foreground 'font-lock-comment-face "#A6A4A7")
-  ))
+  ((null window-system)
+   (when emacs23-p
+     (require 'color-theme-molokai)
+     (color-theme-molokai)
+     ;; customize
+     (set-face-foreground 'font-lock-function-name-face "#5EC84E")
+     (set-face-foreground 'font-lock-type-face "#FF8700")
+     (set-face-foreground 'font-lock-string-face "#CCCCAC")
+     (set-face-foreground 'font-lock-comment-face "#A6A4A7")
+     )
+   (when emacs24-p
+     (setq custom-theme-directory "~/.emacs.d/themes/")
+     (load-theme 'molokai t)
+     ; (package-initialize)
+     ; (require 'color-theme)
+     ; (color-theme-initialize)
+     )
+   )
+  )
 
 ;; ターミナル以外の場合
 (when window-system
@@ -376,10 +391,6 @@
             (setq c-basic-offset 2)
             (c-set-offset 'topmost-intro-cont 0)))
 
-;; JavaScript
-(when (require 'js2-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.\\(js\\|json\\)$" . js2-mode)))
-
 ;; Scala
 (when (require 'scala-mode-auto)
   (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode)))
@@ -433,3 +444,116 @@
   (load-library "sql-indent"))
 (custom-set-variables
  '(sql-indent-offset 2))
+
+;; web-mode
+;; http://web-mode.org/
+(when (require 'web-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+
+  ;; 色の設定
+  (custom-set-faces
+   '(web-mode-doctype-face
+     ((t (:foreground "#82AE46"))))
+   '(web-mode-html-tag-face
+     ((t (:foreground "#E6B422" :weight bold))))
+   '(web-mode-html-attr-name-face
+     ((t (:foreground "#C97586"))))
+   '(web-mode-html-attr-value-face
+     ((t (:foreground "#82AE46"))))
+   '(web-mode-comment-face
+     ((t (:foreground "#D9333F"))))
+   '(web-mode-server-comment-face
+     ((t (:foreground "#D9333F"))))
+   '(web-mode-css-rule-face
+     ((t (:foreground "#A0D8EF"))))
+   '(web-mode-css-pseudo-class-face
+     ((t (:foreground "#FF7F00"))))
+   '(web-mode-css-at-rule-face
+     ((t (:foreground "#FF7F00")))))
+  )
+
+;; JavaScript
+(when (require 'js2-mode nil t)
+  ; Use default js-mode instead of espresso
+  ;; see: http://16777215.blogspot.jp/2011/05/emacs23-js2-mode-without-espresso.html
+  (autoload 'js-mode "js")
+  (defun my-js2-indent-function ()
+    (interactive)
+    (save-restriction
+      (widen)
+      (let* ((inhibit-point-motion-hooks t)
+             (parse-status (save-excursion (syntax-ppss (point-at-bol))))
+             (offset (- (current-column) (current-indentation)))
+             (indentation (js--proper-indentation parse-status))
+             node)
+        (save-excursion
+          ;; I like to indent case and labels to half of the tab width
+          (back-to-indentation)
+          (if (looking-at "case\\s-")
+              (setq indentation (+ indentation (/ js-indent-level 2))))
+          ;; consecutive declarations in a var statement are nice if
+          ;; properly aligned, i.e:
+          ;; var foo = "bar",
+          ;;     bar = "foo";
+          (setq node (js2-node-at-point))
+          (when (and node
+                     (= js2-NAME (js2-node-type node))
+                     (= js2-VAR (js2-node-type (js2-node-parent node))))
+            (setq indentation (+ 4 indentation))))
+        (indent-line-to indentation)
+        (when (> offset 0) (forward-char offset)))))
+
+  (defun my-indent-sexp ()
+    (interactive)
+    (save-restriction
+      (save-excursion
+        (widen)
+        (let* ((inhibit-point-motion-hooks t)
+               (parse-status (syntax-ppss (point)))
+               (beg (nth 1 parse-status))
+               (end-marker (make-marker))
+               (end (progn (goto-char beg) (forward-list) (point)))
+               (ovl (make-overlay beg end)))
+          (set-marker end-marker end)
+          (overlay-put ovl 'face 'highlight)
+          (goto-char beg)
+          (while (< (point) (marker-position end-marker))
+            ;; don't reindent blank lines so we don't set the "buffer
+            ;; modified" property for nothing
+            (beginning-of-line)
+            (unless (looking-at "\\s-*$")
+              (indent-according-to-mode))
+            (forward-line))
+          (run-with-timer 0.5 nil '(lambda(ovl)
+                                     (delete-overlay ovl)) ovl)))))
+  (defun my-js2-mode-hook ()
+    (require 'js)
+    (setq js-indent-level 2
+          indent-tabs-mode nil
+          c-basic-offset 2)
+    (c-toggle-auto-state 0)
+    (c-toggle-hungry-state 1)
+    (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
+                                        ;  (define-key js2-mode-map [(meta control |)] 'cperl-lineup)
+    (define-key js2-mode-map [(meta control \;)]
+      '(lambda()
+         (interactive)
+         (insert "/* -----[ ")
+         (save-excursion
+           (insert " ]----- */"))
+         ))
+    (define-key js2-mode-map [(return)] 'newline-and-indent)
+    (define-key js2-mode-map [(backspace)] 'c-electric-backspace)
+    (define-key js2-mode-map [(control d)] 'c-electric-delete-forward)
+    (define-key js2-mode-map [(control meta q)] 'my-indent-sexp)
+    (if (featurep 'js2-highlight-vars)
+        (js2-highlight-vars-mode))
+    (message "My JS2 hook"))
+
+  (add-hook 'js2-mode-hook 'my-js2-mode-hook)
+  (add-to-list 'auto-mode-alist '("\\.\\(js\\|json\\)$" . js2-mode))
+  )
