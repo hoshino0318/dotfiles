@@ -395,6 +395,10 @@
 (when (require 'scala-mode-auto)
   (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode)))
 
+;; Coffee
+(when (require 'coffee-mode)
+  (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode)))
+
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.\\(frm\\|bas\\|cls\\|vbs\\|vba\\|xla\\)$" . visual-basic-mode)))
