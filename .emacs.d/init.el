@@ -142,9 +142,9 @@
 
 ;; 現在行のハイライト
 (defface my-hl-line-face
-  ;; 背景が dark ならば背景色を #87005F に
+  ;; 背景が dark ならば背景色を #303030 に
   '((((class color)(background dark))
-     (:background "#87005F" t)
+     (:background "#303030" t)
      )
     ;; 背景が light ならば背景色を#FFDFEF に
     (((class color)(background light))
