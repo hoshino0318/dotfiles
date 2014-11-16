@@ -538,7 +538,8 @@
     (require 'js)
     (setq js-indent-level 2
           indent-tabs-mode nil
-          c-basic-offset 2)
+          c-basic-offset 2
+          js2-strict-trailing-comma-warning nil)
     (c-toggle-auto-state 0)
     (c-toggle-hungry-state 1)
     (set (make-local-variable 'indent-line-function) 'my-js2-indent-function)
