@@ -461,13 +461,13 @@
   ;; 色の設定
   (custom-set-faces
    '(web-mode-doctype-face
-     ((t (:foreground "#82AE46"))))
+     ((t (:foreground "#BF1E56"))))
    '(web-mode-html-tag-face
-     ((t (:foreground "#E6B422" :weight bold))))
+     ((t (:foreground "#DB531F"))))
    '(web-mode-html-attr-name-face
-     ((t (:foreground "#C97586"))))
+     ((t (:foreground "#44A5CB"))))
    '(web-mode-html-attr-value-face
-     ((t (:foreground "#82AE46"))))
+     ((t (:foreground "#D8DAB4"))))
    '(web-mode-comment-face
      ((t (:foreground "#D9333F"))))
    '(web-mode-server-comment-face
