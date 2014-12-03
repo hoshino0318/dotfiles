@@ -449,6 +449,9 @@
 (custom-set-variables
  '(sql-indent-offset 2))
 
+;; CSS
+(setq css-indent-offset 2)
+
 ;; web-mode
 ;; http://web-mode.org/
 (when (require 'web-mode nil t)
