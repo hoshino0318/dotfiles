@@ -397,7 +397,9 @@
 
 ;; Coffee
 (when (require 'coffee-mode)
-  (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode)))
+  (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+  (custom-set-variables '(coffee-tab-width 2))
+  )
 
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
