@@ -397,7 +397,9 @@
 
 ;; Coffee
 (when (require 'coffee-mode)
-  (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode)))
+  (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+  (custom-set-variables '(coffee-tab-width 2))
+  )
 
 ;; Visual Basic
 (when (require 'visual-basic-mode nil t)
@@ -449,6 +451,9 @@
 (custom-set-variables
  '(sql-indent-offset 2))
 
+;; CSS
+(setq css-indent-offset 2)
+
 ;; web-mode
 ;; http://web-mode.org/
 (when (require 'web-mode nil t)
@@ -498,16 +503,7 @@
           ;; I like to indent case and labels to half of the tab width
           (back-to-indentation)
           (if (looking-at "case\\s-")
-              (setq indentation (+ indentation (/ js-indent-level 2))))
-          ;; consecutive declarations in a var statement are nice if
-          ;; properly aligned, i.e:
-          ;; var foo = "bar",
-          ;;     bar = "foo";
-          (setq node (js2-node-at-point))
-          (when (and node
-                     (= js2-NAME (js2-node-type node))
-                     (= js2-VAR (js2-node-type (js2-node-parent node))))
-            (setq indentation (+ 4 indentation))))
+              (setq indentation (+ indentation (/ js-indent-level 2)))))
         (indent-line-to indentation)
         (when (> offset 0) (forward-char offset)))))
 
