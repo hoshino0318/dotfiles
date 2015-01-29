@@ -391,9 +391,9 @@
             (setq c-basic-offset 2)
             (c-set-offset 'topmost-intro-cont 0)))
 
-;; Gradle
-(when (require 'gradle-mode)
-  (add-to-list 'auto-mode-alist '("\\.gradle$" . gradle-mode)))
+;; Groovy
+(when (require 'groovy-mode)
+  (add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode)))
 
 ;; Scala
 (when (require 'scala-mode-auto)
