@@ -64,6 +64,9 @@ alias tree="tree -C"
 alias ec="emacsclient"
 #alias java="/usr/java/default/bin/java"
 #alias javac="/usr/java/default/bin/javac"
+
+export PATH=$HOME/bin:$PATH
+
 # OS X に関する設定
 if test -f ~/.mac_alias; then
     source ~/.mac_alias
