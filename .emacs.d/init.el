@@ -1,6 +1,6 @@
 ;; init.el
 ;; Author: Tatsuya Hoshino
-;; Update: 2014/11/01
+;; Update: 2015/01/29
 
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
@@ -390,6 +390,10 @@
             (setq indent-tabs-mode nil)
             (setq c-basic-offset 2)
             (c-set-offset 'topmost-intro-cont 0)))
+
+;; Groovy
+(when (require 'groovy-mode)
+  (add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode)))
 
 ;; Scala
 (when (require 'scala-mode-auto)
