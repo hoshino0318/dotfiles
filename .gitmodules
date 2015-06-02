@@ -4,3 +4,9 @@
 [submodule "zaw"]
 	path = zaw
 	url = https://github.com/zsh-users/zaw.git
+[submodule ".emacs.d/emacs-async"]
+	path = .emacs.d/emacs-async
+	url = git@github.com:jwiegley/emacs-async.git
+[submodule ".emacs.d/helm"]
+	path = .emacs.d/helm
+	url = git@github.com:emacs-helm/helm.git
