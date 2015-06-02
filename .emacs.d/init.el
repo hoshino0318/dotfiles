@@ -18,7 +18,7 @@
 (defvar nt-p (eq system-type 'windows-nt))      ; Windows 用
 
 ;; 引数のディレクトリとそのサブディレクトリを load-path に追加
-(add-to-load-path "elisp" "conf")
+(add-to-load-path "elisp" "conf" "helm" "emacs-async")
 
 ;; 日本語環境設定
 (set-language-environment "Japanese")
@@ -263,53 +263,65 @@
      "Set `ansi-color-for-comint-mode' to t." t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;;; helm
+(when (require 'helm-config nil t)
+  (helm-mode 1)
+
+  (define-key global-map (kbd "M-x")  'helm-M-x)
+  (define-key helm-map (kbd "C-h") 'delete-backward-char)
+  (define-key helm-find-files-map (kbd "C-h") 'delete-backward-char)
+
+  (define-key global-map (kbd "C-x C-f") 'helm-find-files)
+  (define-key global-map (kbd "C-x C-r") 'helm-recentf)
+  )
+
 ;;; anything
 ; (auto-install-batch "anything")
-(require 'anything-startup)
-(when (require 'anything nil t)
-  (setq
-   ;; kill-ring する時の要素の最小値
-   anything-kill-ring-threshold 4
-   ;; 候補を表示するまでの時間 デフォルトは 0.5
-   anything-idle-delay 0.3
-   ;; タイプして再描画するまでの時間 デフォルトは 0.1
-   anything-input-idle-delay 0.2
-   ;; 候補の最大表示数 デフォルトは 50
-   anything-candidate-number-limit 100
-   ;; 候補が多いときに体感速度を早くする
-   anything-quick-update t
-   ;; 候補選択ショートカットをアルファベットに
-   anything-enable-shortcuts 'alphabet)
+;; (require 'anything-startup)
+;; (when (require 'anything nil t)
+;;   (setq
+;;    ;; kill-ring する時の要素の最小値
+;;    anything-kill-ring-threshold 4
+;;    ;; 候補を表示するまでの時間 デフォルトは 0.5
+;;    anything-idle-delay 0.3
+;;    ;; タイプして再描画するまでの時間 デフォルトは 0.1
+;;    anything-input-idle-delay 0.2
+;;    ;; 候補の最大表示数 デフォルトは 50
+;;    anything-candidate-number-limit 100
+;;    ;; 候補が多いときに体感速度を早くする
+;;    anything-quick-update t
+;;    ;; 候補選択ショートカットをアルファベットに
+;;    anything-enable-shortcuts 'alphabet)
 
-  (when (require 'anything-config nil t)
-    ;; root 権限でアクションを実行するときのコマンド
-    ;; デフォルトでは "su"
-    (setq anything-su-or-sudo "sudo"))
+;;   (when (require 'anything-config nil t)
+;;     ;; root 権限でアクションを実行するときのコマンド
+;;     ;; デフォルトでは "su"
+;;     (setq anything-su-or-sudo "sudo"))
 
-  (require 'anything-match-plugin nil t)
+;;   (require 'anything-match-plugin nil t)
 
-  (when (and (executable-find "cmigemo")
-             (require 'migemo nil t))
-    (require 'anything-migemo nil t))
+;;   (when (and (executable-find "cmigemo")
+;;              (require 'migemo nil t))
+;;     (require 'anything-migemo nil t))
 
-  (when (require 'anything-complete nil t)
-    ;; lisp シンボルの補完候補の再検索時間
-    (anything-lisp-complete-symbol-set-timer 150))
+;;   (when (require 'anything-complete nil t)
+;;     ;; lisp シンボルの補完候補の再検索時間
+;;     (anything-lisp-complete-symbol-set-timer 150))
 
-  (require 'anything-show-completion nil t)
+;;   (require 'anything-show-completion nil t)
 
-  (when (require 'auto-install nil t)
-    (require 'anything-auto-install nil t))
+;;   (when (require 'auto-install nil t)
+;;     (require 'anything-auto-install nil t))
 
-  (when (require 'descbinds-anything nil t)
-    ;; describe-bindings をAnything に置き換える
-    (descbinds-anything-install))
-  ;; M-y にanything-show-kill-ring を割り当てる
-  (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
+;;   (when (require 'descbinds-anything nil t)
+;;     ;; describe-bindings をAnything に置き換える
+;;     (descbinds-anything-install))
+;;   ;; M-y にanything-show-kill-ring を割り当てる
+;;   (define-key global-map (kbd "M-y") 'anything-show-kill-ring)
 
-  ;; map C-x b to anything-for-files
-  (global-set-key (kbd "C-x b") 'anything-for-files)
-  )
+;;   ;; map C-x b to anything-for-files
+;;   (global-set-key (kbd "C-x b") 'anything-for-files)
+;;   )
 ;; end anything
 
 ;; ##### Ruby ######
