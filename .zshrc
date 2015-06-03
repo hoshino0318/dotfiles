@@ -207,3 +207,5 @@ function peco-src () {
 zle -N peco-src
 bindkey '^]' peco-src
 
+# Unset for zaw
+unsetopt sh_word_split
