@@ -64,6 +64,9 @@ alias tree="tree -C"
 alias ec="emacsclient"
 #alias java="/usr/java/default/bin/java"
 #alias javac="/usr/java/default/bin/javac"
+
+export PATH=$HOME/bin:$PATH
+
 # OS X に関する設定
 if test -f ~/.mac_alias; then
     source ~/.mac_alias
@@ -178,7 +181,18 @@ fi
 autoload -U compinit && compinit
 
 # zaw
-source ~/dotfiles/zaw/zaw.zsh
+autoload -Uz is-at-least
+if is-at-least 4.3.11
+then
+  autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+  add-zsh-hook chpwd chpwd_recent_dirs
+  zstyle ':chpwd:*' recent-dirs-max 1000
+  zstyle ':chpwd:*' recent-dirs-default yes
+  zstyle ':completion:*' recent-dirs-insert both
+
+  source ~/dotfiles/zaw/zaw.zsh
+  bindkey '^@' zaw-cdr # zaw-cdrをbindkey
+fi
 
 # peco function
 # see: http://weblog.bulknews.net/post/89635306479/ghq-peco-percol
@@ -192,3 +206,4 @@ function peco-src () {
 }
 zle -N peco-src
 bindkey '^]' peco-src
+
