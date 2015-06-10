@@ -104,11 +104,6 @@
 (set-face-foreground 'mode-line-inactive "gray30")
 (set-face-background 'mode-line-inactive "gray85")
 
-;; dmacro
-(defconst *dmacro-key* "\C-t" "繰返し指定キー")
-(global-set-key *dmacro-key* 'dmacro-exec)
-(autoload 'dmacro-exec "dmacro" nil t)
-
 ;; 最大限色付け
 (setq font-lock-maximum-decoration t)
 
