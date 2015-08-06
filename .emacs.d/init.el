@@ -285,8 +285,8 @@
 ;; 括弧の自動挿入
 ;; (require 'ruby-electric nil t)
 ;; end に対応する行のハイライト
-(when (require 'ruby-block nil t)
-  (setq ruby-block-highlight-toggle t))
+;; (when (require 'ruby-block nil t)
+;;   (setq ruby-block-highlight-toggle t))
 ;; インタラクティブ Ruby を利用する
 (autoload 'run-ruby "inf-ruby"
   "Run an inferior Ruby Process")
