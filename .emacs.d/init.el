@@ -384,7 +384,9 @@
 
 ;; Lua
 (when (require 'lua-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode)))
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  (custom-set-variables '(lua-indent-level 2))
+  )
 
 ;; Less
 (when (require 'less-css-mode nil t)
