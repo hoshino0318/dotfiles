@@ -382,6 +382,10 @@
 (when (require 'haml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
 
+;; Lua
+(when (require 'lua-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode)))
+
 ;; Less
 (when (require 'less-css-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode)))
