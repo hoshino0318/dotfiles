@@ -337,6 +337,7 @@
 (defun ruby-mode-hooks ()
   (inf-ruby-keys)
   ;;(ruby-electric-mode t)
+  (require 'ruby-block)
   (ruby-block-mode t))
 ;; ruby-mode-hook に追加
 (add-hook 'ruby-mode-hook 'ruby-mode-hooks)
