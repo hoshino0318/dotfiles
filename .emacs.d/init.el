@@ -27,6 +27,10 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
+;; tab
+(setq default-tab-width 2)
+
+
 ;; isearchで日本語を検索できるようにする
 (defun w32-isearch-update ()
   (interactive)
@@ -360,6 +364,11 @@
             (setq indent-tabs-mode nil)
             (setq c-basic-offset 2)
             (c-set-offset 'topmost-intro-cont 0)))
+
+;; Golang
+(when (require 'go-mode-autoloads)
+  (add-to-list 'auto-mode-alist '("\\.go$" . go-mode)))
+
 
 ;; Groovy
 (when (require 'groovy-mode)
