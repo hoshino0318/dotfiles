@@ -1,9 +1,13 @@
-;; init.el
+;;; init.el --- emacs init script
 ;; Author: Tatsuya Hoshino
 ;; Update: 2015/01/29
 
+;;; Commentary:
+
+;;; Code:
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
+  "PATHS."
   (let (path)
     (dolist (path paths paths)
       (let ((default-directory
@@ -30,8 +34,8 @@
 ;; tab width
 (setq tab-width 2)
 
-;; isearchで日本語を検索できるようにする
 (defun w32-isearch-update ()
+  "Enable the isearch in Japanese."
   (interactive)
   (isearch-update))
 (define-key isearch-mode-map [compend] 'w32-isearch-update)
@@ -330,6 +334,7 @@
 ;; fix ruby mode indent
 (setq ruby-deep-indent-paren-style nil)
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
+  "."
   (let ((column (current-column))
         indent offset)
     (save-excursion
@@ -346,6 +351,7 @@
 
 ;; ruby-mode-hook 用の関数を定義
 (defun ruby-mode-hooks ()
+  "."
   (inf-ruby-keys)
   ;;(ruby-electric-mode t)
   (require 'ruby-block)
@@ -555,3 +561,5 @@
   (add-hook 'js2-mode-hook 'my-js2-mode-hook)
   (add-to-list 'auto-mode-alist '("\\.\\(js\\|json\\)$" . js2-mode))
   )
+(provide 'init)
+;;; init.el ends here
