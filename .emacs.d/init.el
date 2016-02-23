@@ -175,10 +175,22 @@
 (custom-set-variables
  '(recentf-save-file "~/.emacs.d/.recentf"))
 
-;; package
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(package-initialize)
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
+
+;; el-get
+;; see also: http://tarao.hatenablog.com/entry/20150221/1424518030
+(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+;; el-get dependencies
+(el-get-bundle auto-complete)
+(el-get-bundle flycheck)
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
