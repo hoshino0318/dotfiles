@@ -337,6 +337,7 @@
 (defun ruby-mode-hooks ()
   (inf-ruby-keys)
   ;;(ruby-electric-mode t)
+  (require 'ruby-block)
   (ruby-block-mode t))
 ;; ruby-mode-hook に追加
 (add-hook 'ruby-mode-hook 'ruby-mode-hooks)
@@ -384,7 +385,9 @@
 
 ;; Lua
 (when (require 'lua-mode nil t)
-  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode)))
+  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+  (custom-set-variables '(lua-indent-level 2))
+  )
 
 ;; Less
 (when (require 'less-css-mode nil t)
