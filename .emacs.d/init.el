@@ -191,6 +191,21 @@
 ;; el-get dependencies
 (el-get-bundle auto-complete)
 (el-get-bundle flycheck)
+(el-get-bundle coffee-mode)
+(el-get-bundle emmet-mode)
+(el-get-bundle go-mode)
+(el-get-bundle groovy-emacs-mode)
+(el-get-bundle haml-mode)
+(el-get-bundle haskell-mode)
+(el-get-bundle js2-mode)
+(el-get-bundle less-css-mode)
+(el-get-bundle lua-mode)
+(el-get-bundle markdown-mode)
+(el-get-bundle scala-mode2)
+(el-get-bundle slim-mode)
+(el-get-bundle emacswiki:visual-basic-mode)
+(el-get-bundle web-mode)
+(el-get-bundle yaml-mode)
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -376,7 +391,7 @@
 ;; #################
 
 ;; Haskell
-(when (load "haskell-site-file")
+(when (load "haskell-mode-autoloads")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (add-hook 'haskell-mode-hook 'font-lock-mode)
@@ -400,7 +415,7 @@
   (add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode)))
 
 ;; Scala
-(when (require 'scala-mode-auto)
+(when (require 'scala-mode2)
   (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode)))
 
 ;; Coffee
@@ -442,12 +457,12 @@
 ;; YASnippet
 (when (require 'yasnippet-bundle nil t))
 
-;; Zen Coding
-(when (require 'zencoding-mode nil t)
-  (add-hook 'sgml-mode-hook 'zencoding-mode)
-  (add-hook 'html-mode-hook 'zencoding-mode)
-  ;; M-e を zenconding-expand-line にする
-  (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
+;; Emmet
+(when (require 'emmet-mode nil t)
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'html-mode-hook 'emmet-mode)
+  ;; M-e を emmet-expand-line にする
+  (define-key emmet-mode-keymap (kbd "M-e") 'emmet-expand-line)
   )
 
 ;; SVN
