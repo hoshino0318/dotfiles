@@ -98,8 +98,8 @@
 (setq inhibit-startup-message t)
 
 ;; cua-mode
-(cua-mode t)
-(setq cua-enable-cua-keys nil)
+;; (cua-mode t)
+;; (defvar cua-enable-cua-keys nil)
 
 ;; mode line color
 (set-face-foreground 'mode-line "white")
