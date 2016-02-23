@@ -50,7 +50,7 @@
 (define-key global-map (kbd "C-q") 'other-window)
 
 ;; 反対側のウィンドウにいけるように
-(setq windmove-wrap-around t)
+(defvar windmove-wrap-around t)
 ;; C-M-{h,j,k,l}でウィンドウ間を移動
 (define-key global-map (kbd "C-M-k") 'windmove-up)
 (define-key global-map (kbd "C-M-j") 'windmove-down)
