@@ -27,9 +27,8 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
-;; tab
+;; tab width
 (setq default-tab-width 2)
-
 
 ;; isearchで日本語を検索できるようにする
 (defun w32-isearch-update ()
@@ -171,6 +170,14 @@
 (recentf-mode 1)
 (custom-set-variables
  '(recentf-save-file "~/.emacs.d/.recentf"))
+
+;; package
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+
+;; flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; auto-install の設定
 ;; (cond
