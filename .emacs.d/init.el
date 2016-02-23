@@ -28,7 +28,7 @@
 (set-keyboard-coding-system 'utf-8)
 
 ;; tab width
-(setq default-tab-width 2)
+(setq tab-width 2)
 
 ;; isearchで日本語を検索できるようにする
 (defun w32-isearch-update ()
