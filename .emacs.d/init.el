@@ -1,9 +1,13 @@
-;; init.el
+;;; init.el --- emacs init script
 ;; Author: Tatsuya Hoshino
 ;; Update: 2015/01/29
 
+;;; Commentary:
+
+;;; Code:
 ;; load-path を追加する関数を定義
 (defun add-to-load-path (&rest paths)
+  "PATHS."
   (let (path)
     (dolist (path paths paths)
       (let ((default-directory
@@ -27,8 +31,11 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 
-;; isearchで日本語を検索できるようにする
+;; tab width
+(setq tab-width 2)
+
 (defun w32-isearch-update ()
+  "Enable the isearch in Japanese."
   (interactive)
   (isearch-update))
 (define-key isearch-mode-map [compend] 'w32-isearch-update)
@@ -47,7 +54,7 @@
 (define-key global-map (kbd "C-q") 'other-window)
 
 ;; 反対側のウィンドウにいけるように
-(setq windmove-wrap-around t)
+(defvar windmove-wrap-around t)
 ;; C-M-{h,j,k,l}でウィンドウ間を移動
 (define-key global-map (kbd "C-M-k") 'windmove-up)
 (define-key global-map (kbd "C-M-j") 'windmove-down)
@@ -95,8 +102,8 @@
 (setq inhibit-startup-message t)
 
 ;; cua-mode
-(cua-mode t)
-(setq cua-enable-cua-keys nil)
+;; (cua-mode t)
+;; (defvar cua-enable-cua-keys nil)
 
 ;; mode line color
 (set-face-foreground 'mode-line "white")
@@ -167,6 +174,41 @@
 (recentf-mode 1)
 (custom-set-variables
  '(recentf-save-file "~/.emacs.d/.recentf"))
+
+(when load-file-name
+  (setq user-emacs-directory (file-name-directory load-file-name)))
+
+;; el-get
+;; see also: http://tarao.hatenablog.com/entry/20150221/1424518030
+(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+;; el-get dependencies
+(el-get-bundle auto-complete)
+(el-get-bundle flycheck)
+(el-get-bundle coffee-mode)
+(el-get-bundle emmet-mode)
+(el-get-bundle go-mode)
+(el-get-bundle groovy-emacs-mode)
+(el-get-bundle haml-mode)
+(el-get-bundle haskell-mode)
+(el-get-bundle js2-mode)
+(el-get-bundle less-css-mode)
+(el-get-bundle lua-mode)
+(el-get-bundle markdown-mode)
+(el-get-bundle scala-mode2)
+(el-get-bundle slim-mode)
+(el-get-bundle emacswiki:visual-basic-mode)
+(el-get-bundle web-mode)
+(el-get-bundle yaml-mode)
+
+;; flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; auto-install の設定
 ;; (cond
@@ -319,6 +361,7 @@
 ;; fix ruby mode indent
 (setq ruby-deep-indent-paren-style nil)
 (defadvice ruby-indent-line (after unindent-closing-paren activate)
+  "."
   (let ((column (current-column))
         indent offset)
     (save-excursion
@@ -335,6 +378,7 @@
 
 ;; ruby-mode-hook 用の関数を定義
 (defun ruby-mode-hooks ()
+  "."
   (inf-ruby-keys)
   ;;(ruby-electric-mode t)
   (require 'ruby-block)
@@ -347,7 +391,7 @@
 ;; #################
 
 ;; Haskell
-(when (load "haskell-site-file")
+(when (load "haskell-mode-autoloads")
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
   (add-hook 'haskell-mode-hook 'font-lock-mode)
@@ -361,12 +405,17 @@
             (setq c-basic-offset 2)
             (c-set-offset 'topmost-intro-cont 0)))
 
+;; Golang
+(when (require 'go-mode-autoloads)
+  (add-to-list 'auto-mode-alist '("\\.go$" . go-mode)))
+
+
 ;; Groovy
 (when (require 'groovy-mode)
   (add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode)))
 
 ;; Scala
-(when (require 'scala-mode-auto)
+(when (require 'scala-mode2)
   (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode)))
 
 ;; Coffee
@@ -408,12 +457,12 @@
 ;; YASnippet
 (when (require 'yasnippet-bundle nil t))
 
-;; Zen Coding
-(when (require 'zencoding-mode nil t)
-  (add-hook 'sgml-mode-hook 'zencoding-mode)
-  (add-hook 'html-mode-hook 'zencoding-mode)
-  ;; M-e を zenconding-expand-line にする
-  (define-key zencoding-mode-keymap (kbd "M-e") 'zencoding-expand-line)
+;; Emmet
+(when (require 'emmet-mode nil t)
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'html-mode-hook 'emmet-mode)
+  ;; M-e を emmet-expand-line にする
+  (define-key emmet-mode-keymap (kbd "M-e") 'emmet-expand-line)
   )
 
 ;; SVN
@@ -539,3 +588,5 @@
   (add-hook 'js2-mode-hook 'my-js2-mode-hook)
   (add-to-list 'auto-mode-alist '("\\.\\(js\\|json\\)$" . js2-mode))
   )
+(provide 'init)
+;;; init.el ends here
