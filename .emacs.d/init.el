@@ -142,6 +142,13 @@
 ;;   (setq multi-term-program shell-file-name)
 ;;   )
 
+;; markdown date title
+(defun md-date-title ()
+  "Insert a date title as markdown."
+  (interactive)
+  (insert (concat (format-time-string "%Y/%m/%d" (current-time)) "\n==========\n" ))
+  )
+
 ;; 現在行のハイライト
 (defface my-hl-line-face
   ;; 背景が dark ならば背景色を #303030 に
@@ -190,22 +197,25 @@
 
 ;; el-get dependencies
 (el-get-bundle auto-complete)
-(el-get-bundle flycheck)
 (el-get-bundle coffee-mode)
+(el-get-bundle emacswiki:visual-basic-mode)
 (el-get-bundle emmet-mode)
+(el-get-bundle flycheck)
 (el-get-bundle go-mode)
 (el-get-bundle groovy-emacs-mode)
 (el-get-bundle haml-mode)
 (el-get-bundle haskell-mode)
 (el-get-bundle js2-mode)
+(el-get-bundle json-mode)
+(el-get-bundle json-snatcher)
 (el-get-bundle less-css-mode)
 (el-get-bundle lua-mode)
 (el-get-bundle markdown-mode)
 (el-get-bundle scala-mode2)
 (el-get-bundle slim-mode)
-(el-get-bundle emacswiki:visual-basic-mode)
 (el-get-bundle web-mode)
 (el-get-bundle yaml-mode)
+(el-get-bundle yasnippet)
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -432,6 +442,12 @@
 (when (require 'haml-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode)))
 
+;; JSON
+(when (require 'json-mode nil t)
+  (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+  (custom-set-variables '(js-indent-level 2))
+  )
+
 ;; Lua
 (when (require 'lua-mode nil t)
   (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
@@ -455,7 +471,7 @@
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
 ;; YASnippet
-(when (require 'yasnippet-bundle nil t))
+(when (require 'yasnippet nil t))
 
 ;; Emmet
 (when (require 'emmet-mode nil t)
@@ -586,7 +602,7 @@
     (message "My JS2 hook"))
 
   (add-hook 'js2-mode-hook 'my-js2-mode-hook)
-  (add-to-list 'auto-mode-alist '("\\.\\(js\\|json\\)$" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.\\(js\\)$" . js2-mode))
   )
 (provide 'init)
 ;;; init.el ends here

@@ -416,141 +416,140 @@ How to send a bug report:
 ;;;; unit test
 ;; (install-elisp "http://www.emacswiki.org/cgi-bin/wiki/download/el-expectations.el")
 ;; (install-elisp "http://www.emacswiki.org/cgi-bin/wiki/download/el-mock.el")
-(dont-compile
-  (when (fboundp 'expectations)
-    (defun lispxmp-to-string (lispxmp-string-no-properties from)
-      (with-temp-buffer
-        (insert from)
-        (lispxmp)
-        (buffer-string)))
-    (expectations
-      (desc "lispxmp-string-no-properties = t")
-      (expect "\"a\\nb\" ; => \"a\\nb\"
+(when (fboundp 'expectations)
+  (defun lispxmp-to-string (lispxmp-string-no-properties from)
+    (with-temp-buffer
+      (insert from)
+      (lispxmp)
+      (buffer-string)))
+  (expectations
+   (desc "lispxmp-string-no-properties = t")
+   (expect "\"a\\nb\" ; => \"a\\nb\"
 "
-        (lispxmp-to-string t "\"a\\nb\" ; => "))
-      (expect "(propertize \"aaaa\" 'face 'match) ; => \"aaaa\"
+           (lispxmp-to-string t "\"a\\nb\" ; => "))
+   (expect "(propertize \"aaaa\" 'face 'match) ; => \"aaaa\"
 "
-        (lispxmp-to-string t "(propertize \"aaaa\" 'face 'match) ; => "))
-      (expect "
+           (lispxmp-to-string t "(propertize \"aaaa\" 'face 'match) ; => "))
+   (expect "
  (list (propertize \"a\" 'face 'match)
  (propertize \"b\" 'face 'match)) ; => (\"a\" \"b\")
 "
-        (lispxmp-to-string t "
+           (lispxmp-to-string t "
  (list (propertize \"a\" 'face 'match)
  (propertize \"b\" 'face 'match)) ; => "))
-      (desc "lispxmp-string-no-properties = nil")
-      (expect "\"a\\nb\" ; => \"a\\nb\"
+   (desc "lispxmp-string-no-properties = nil")
+   (expect "\"a\\nb\" ; => \"a\\nb\"
 "
-        (lispxmp-to-string nil "\"a\\nb\" ; => "))
-      (expect "(propertize \"aaaa\" 'face 'match) ; => #(\"aaaa\" 0 4 (face match))
+           (lispxmp-to-string nil "\"a\\nb\" ; => "))
+   (expect "(propertize \"aaaa\" 'face 'match) ; => #(\"aaaa\" 0 4 (face match))
 "
-        (lispxmp-to-string nil "(propertize \"aaaa\" 'face 'match) ; => "))
-      (expect "
+           (lispxmp-to-string nil "(propertize \"aaaa\" 'face 'match) ; => "))
+   (expect "
  (list (propertize \"a\" 'face 'match)
  (propertize \"b\" 'face 'match)) ; =>\
  (#(\"a\" 0 1 (face match)) #(\"b\" 0 1 (face match)))
 "
-        (lispxmp-to-string nil "
+           (lispxmp-to-string nil "
  (list (propertize \"a\" 'face 'match)
  (propertize \"b\" 'face 'match)) ; => "))
-      (desc "destructive annotation test")
-      (expect "
+   (desc "destructive annotation test")
+   (expect "
          (setq l (list 1 2)) ; => (1 2)
          (setcar l 100)      ; => 100
          l                   ; => (100 2)
 "
-        (lispxmp-to-string t "
+           (lispxmp-to-string t "
          (setq l (list 1 2)) ; =>
          (setcar l 100)      ; =>
          l                   ; =>
 "))
-      (expect "
+   (expect "
          (setq s (copy-sequence \"abcd\")) ; => \"abcd\"
          (aset s 0 ?A)                     ; => 65
          s                                 ; => \"Abcd\"
 "
-        (lispxmp-to-string t "
+           (lispxmp-to-string t "
          (setq s (copy-sequence \"abcd\")) ; =>
          (aset s 0 ?A)                     ; =>
          s                                 ; =>
 "))
-      (expect "
+   (expect "
          (setq c (cons 1 2)) ; => (1 . 2)
          (setcar c 100)      ; => 100
          c                   ; => (100 . 2)
 "
-        (lispxmp-to-string t "
+           (lispxmp-to-string t "
          (setq c (cons 1 2)) ; =>
          (setcar c 100)      ; =>
          c                   ; =>
 "))
-      (desc "pp test")
-      (expect "'((\"a\") \"b\" (\"c\"))
+   (desc "pp test")
+   (expect "'((\"a\") \"b\" (\"c\"))
 ;;; => ((\"a\")
 ;;;     \"b\"
 ;;;     (\"c\"))
 "
-        (lispxmp-to-string t "'((\"a\") \"b\" (\"c\"))
+           (lispxmp-to-string t "'((\"a\") \"b\" (\"c\"))
 ;;; =>
 "))
-      (expect "'((\"a\") \"b\" (\"c\"))
+   (expect "'((\"a\") \"b\" (\"c\"))
 ;; => ((\"a\")
 ;;     \"b\"
 ;;     (\"c\"))
 "
-        (lispxmp-to-string t "'((\"a\") \"b\" (\"c\"))
+           (lispxmp-to-string t "'((\"a\") \"b\" (\"c\"))
 ;; =>
 "))
-      (expect "'((\"a\") \"b\" (\"c\"))
+   (expect "'((\"a\") \"b\" (\"c\"))
 ;;; => ((\"a\")
 ;;;     \"b\"
 ;;;     (\"c\"))
 "
-        (lispxmp-to-string nil "'((\"a\") \"b\" (\"c\"))
+           (lispxmp-to-string nil "'((\"a\") \"b\" (\"c\"))
 ;;; =>
 "))
-      (expect "'((\"a\") \"b\" (\"c\"))
+   (expect "'((\"a\") \"b\" (\"c\"))
 ;; => ((\"a\")
 ;;     \"b\"
 ;;     (\"c\"))
 "
-        (lispxmp-to-string nil "'((\"a\") \"b\" (\"c\"))
+           (lispxmp-to-string nil "'((\"a\") \"b\" (\"c\"))
 ;; =>
 "))
-      (expect "'a
+   (expect "'a
 ;;; => a
 "
-        (lispxmp-to-string t "'a
+           (lispxmp-to-string t "'a
 ;;; =>
 "))
-      (expect "'(\"a\")
+   (expect "'(\"a\")
 ;;; => (\"a\")
 "
-        (lispxmp-to-string t "'(\"a\")
+           (lispxmp-to-string t "'(\"a\")
 ;;; =>
 "))
-      (desc "pp reexecute")
-      (expect "'((\"a\") \"b\" (\"c\"))
+   (desc "pp reexecute")
+   (expect "'((\"a\") \"b\" (\"c\"))
 ;;; => ((\"a\")
 ;;;     \"b\"
 ;;;     (\"c\"))
 "
-        (lispxmp-to-string t "'((\"a\") \"b\" (\"c\"))
+           (lispxmp-to-string t "'((\"a\") \"b\" (\"c\"))
 ;;; => ((\"a\")
 ;;;     \"b\"
 ;;;     (\"c\"))
 "))
-      (expect "1
+   (expect "1
 ;;; => 1
 ;;; 2
 ;;;    3
 "
-        (lispxmp-to-string t "1
+           (lispxmp-to-string t "1
 ;;; => 1
 ;;; 2
 ;;;    3
 "))
-      )))
+   ))
 
 (provide 'lispxmp)
 
