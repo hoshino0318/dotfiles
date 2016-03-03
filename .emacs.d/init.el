@@ -208,6 +208,7 @@
 (el-get-bundle slim-mode)
 (el-get-bundle web-mode)
 (el-get-bundle yaml-mode)
+(el-get-bundle yasnippet)
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -463,7 +464,7 @@
   (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode)))
 
 ;; YASnippet
-(when (require 'yasnippet-bundle nil t))
+(when (require 'yasnippet nil t))
 
 ;; Emmet
 (when (require 'emmet-mode nil t)
