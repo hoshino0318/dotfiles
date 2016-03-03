@@ -142,6 +142,13 @@
 ;;   (setq multi-term-program shell-file-name)
 ;;   )
 
+;; markdown date title
+(defun md-date-title ()
+  "Insert a date title as markdown."
+  (interactive)
+  (insert (concat (format-time-string "%Y/%m/%d" (current-time)) "\n==========\n" ))
+  )
+
 ;; 現在行のハイライト
 (defface my-hl-line-face
   ;; 背景が dark ならば背景色を #303030 に
