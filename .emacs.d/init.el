@@ -182,6 +182,10 @@
 (custom-set-variables
  '(recentf-save-file "~/.emacs.d/.recentf"))
 
+;; proxy
+(if (file-exists-p "~/.proxy.el")
+    (load-file "~/.proxy.el"))
+
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
@@ -192,6 +196,7 @@
   (with-current-buffer
       (url-retrieve-synchronously
        "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+       ;; "https://example.com/el-get/master/el-get-install.el")
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
