@@ -203,7 +203,6 @@
 ;; el-get dependencies
 (el-get-bundle auto-complete)
 (el-get-bundle coffee-mode)
-(el-get-bundle emacswiki:visual-basic-mode)
 (el-get-bundle emmet-mode)
 (el-get-bundle flycheck)
 (el-get-bundle go-mode)
