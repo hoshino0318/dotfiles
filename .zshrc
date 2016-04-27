@@ -159,7 +159,8 @@ function man() {
 }
 
 # Colored grep
-export GREP_OPTIONS='--color=auto'
+alias grep='grep --color=auto'
+#export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='01;38;5;74'
 
 # This loads RVM into a shell session.
