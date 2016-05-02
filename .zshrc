@@ -89,6 +89,8 @@ setopt correct
 # コマンドラインの引数で –prefix=/usr などの = 以降でも補完できる
 setopt magic_equal_subst
 
+setopt extended_glob
+
 # LSCOLORS (BSD 用) の色を変更
 export LSCOLORS=Exfxcxdxbxegedabagacad
 # LSOLORS の色変更
