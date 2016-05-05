@@ -90,6 +90,7 @@ NeoBundle 'slim-template/vim-slim'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'digitaltoad/vim-jade'
 NeoBundle 'Align',
+NeoBundle 'markcornick/vim-bats'
 NeoBundleLazy 'dag/vim2hs'
 NeoBundleLazy 'derekwyatt/vim-scala'
 NeoBundleLazy 'elzr/vim-json'
