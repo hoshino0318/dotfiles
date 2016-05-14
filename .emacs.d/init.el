@@ -417,7 +417,9 @@
 
 ;; Golang
 (when (require 'go-mode-autoloads)
-  (add-to-list 'auto-mode-alist '("\\.go$" . go-mode)))
+  (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
+  (custom-set-variables '(tab-width 2))
+  )
 
 
 ;; Groovy
