@@ -125,6 +125,7 @@ if (isdirectory(expand('$GOROOT')))
 endif
 autocmd BufNewFile,BufRead *.go setlocal filetype=go
 autocmd FileType go setlocal tabstop=2 shiftwidth=2
+let g:go_fmt_command = "goimports"
 
 " neosnippet.vim
 " Plugin key-mappings.
