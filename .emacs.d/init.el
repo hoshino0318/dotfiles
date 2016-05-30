@@ -208,7 +208,7 @@
 (el-get-bundle go-mode)
 (el-get-bundle groovy-emacs-mode)
 (el-get-bundle haml-mode)
-(el-get-bundle haskell-mode)
+;; (el-get-bundle haskell-mode)
 (el-get-bundle js2-mode)
 (el-get-bundle json-mode)
 (el-get-bundle json-snatcher)
@@ -405,12 +405,12 @@
 ;; #################
 
 ;; Haskell
-(when (load "haskell-mode-autoloads")
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-  (add-hook 'haskell-mode-hook 'font-lock-mode)
-  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
-  )
+;; (when (load "haskell-mode-autoloads")
+;;   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;;   (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;   (add-hook 'haskell-mode-hook 'font-lock-mode)
+;;   (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
+;;   )
 
 ;; Java
 (add-hook 'java-mode-hook
