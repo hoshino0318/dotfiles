@@ -193,7 +193,8 @@ then
   zstyle ':completion:*' recent-dirs-insert both
 
   source ~/dotfiles/zaw/zaw.zsh
-  bindkey '^@' zaw-cdr # zaw-cdrをbindkey
+  bindkey '^@' zaw-cdr
+  bindkey '^X^B' zaw-git-branches
 fi
 
 # peco function
