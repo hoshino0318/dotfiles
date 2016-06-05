@@ -423,6 +423,8 @@
 (when (require 'go-mode-autoloads)
   (add-to-list 'auto-mode-alist '("\\.go$" . go-mode))
   (custom-set-variables '(tab-width 2))
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
   )
 
 
